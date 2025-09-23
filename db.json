@@ -159,6 +159,46 @@
       "image": "https://via.placeholder.com/300x200?text=Dell+Alienware",
       "description": "High-performance gaming desktop with Intel Core i7 and RTX graphics.",
       "category": "computers"
+    },
+    {
+      "id": 21,
+      "name": "iPhone 15",
+      "price": 1099.99,
+      "image": "https://via.placeholder.com/300x200?text=iPhone+15",
+      "description": "Latest iPhone with advanced camera system and A17 Pro chip.",
+      "category": "phones"
+    },
+    {
+      "id": 22,
+      "name": "ASUS ROG Strix Gaming Laptop",
+      "price": 1599.99,
+      "image": "https://via.placeholder.com/300x200?text=ASUS+ROG+Strix",
+      "description": "High-performance gaming laptop with AMD Ryzen 9 and RTX 4070.",
+      "category": "laptops"
+    },
+    {
+      "id": 23,
+      "name": "Bose QuietComfort Earbuds",
+      "price": 279.99,
+      "image": "https://via.placeholder.com/300x200?text=Bose+QuietComfort",
+      "description": "Premium wireless earbuds with world-class noise cancellation.",
+      "category": "accessories"
+    },
+    {
+      "id": 24,
+      "name": "TCL 65\" 4K QLED TV",
+      "price": 899.99,
+      "image": "https://via.placeholder.com/300x200?text=TCL+65+4K",
+      "description": "65-inch 4K QLED TV with HDR and smart TV features.",
+      "category": "tvs"
+    },
+    {
+      "id": 25,
+      "name": "Apple Mac Mini M2",
+      "price": 599.99,
+      "image": "https://via.placeholder.com/300x200?text=Mac+Mini+M2",
+      "description": "Compact desktop computer with M2 chip, perfect for everyday tasks.",
+      "category": "computers"
     }
   ],
   "cart": []
