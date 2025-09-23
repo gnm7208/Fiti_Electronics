@@ -63,6 +63,38 @@
       "image": "https://via.placeholder.com/300x200?text=HP+Desktop",
       "description": "Reliable desktop computer for everyday use.",
       "category": "computers"
+    },
+    {
+      "id": 9,
+      "name": "HP ProBook 445 G9 Ryzen 7",
+      "price": 899.99,
+      "image": "https://via.placeholder.com/300x200?text=HP+ProBook+445+G9",
+      "description": "Business laptop with AMD Ryzen 7 processor, 16GB RAM, and 512GB SSD.",
+      "category": "laptops"
+    },
+    {
+      "id": 10,
+      "name": "MacBook Air M2",
+      "price": 1199.99,
+      "image": "https://via.placeholder.com/300x200?text=MacBook+Air+M2",
+      "description": "Ultra-light laptop with Apple M2 chip, 8GB RAM, and 256GB SSD.",
+      "category": "laptops"
+    },
+    {
+      "id": 11,
+      "name": "Lenovo ThinkPad X1 Carbon Core i7",
+      "price": 1499.99,
+      "image": "https://via.placeholder.com/300x200?text=Lenovo+X1+Carbon",
+      "description": "Premium business laptop with Intel Core i7, 16GB RAM, and 512GB SSD.",
+      "category": "laptops"
+    },
+    {
+      "id": 12,
+      "name": "HP EliteBook 1040 Core i7",
+      "price": 1299.99,
+      "image": "https://via.placeholder.com/300x200?text=HP+EliteBook+1040",
+      "description": "Professional laptop with Intel Core i7, 16GB RAM, and 512GB SSD.",
+      "category": "laptops"
     }
   ],
   "cart": []

@@ -22,3 +22,4 @@
 - [x] Test the application
 - [x] Prepare for deployment
 - [x] Add category menu and filtering
+- [x] Add more laptop products (HP ProBook 445 G9, MacBook Air M2, Lenovo X1 Carbon, HP EliteBook 1040)
