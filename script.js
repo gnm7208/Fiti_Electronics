@@ -188,6 +188,20 @@ searchInput.addEventListener('keypress', (e) => {
     }
 });
 
+// Category filter event listeners
+function addCategoryListeners() {
+    document.querySelectorAll('.category-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            // Remove active class from all buttons
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            e.target.classList.add('active');
+            // Filter products
+            filterProducts(e.target.dataset.category);
+        });
+    });
+}
+
 // Fetch cart data on page load
 async function fetchCart() {
     try {
@@ -204,4 +218,6 @@ async function fetchCart() {
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
     fetchCart();
+    // Add category listeners after DOM is loaded
+    addCategoryListeners();
 });

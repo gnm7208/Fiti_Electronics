@@ -95,6 +95,70 @@
       "image": "https://via.placeholder.com/300x200?text=HP+EliteBook+1040",
       "description": "Professional laptop with Intel Core i7, 16GB RAM, and 512GB SSD.",
       "category": "laptops"
+    },
+    {
+      "id": 13,
+      "name": "Google Pixel 7 Pro",
+      "price": 899.99,
+      "image": "https://via.placeholder.com/300x200?text=Google+Pixel+7+Pro",
+      "description": "Android smartphone with exceptional camera and pure Google experience.",
+      "category": "phones"
+    },
+    {
+      "id": 14,
+      "name": "OnePlus 11",
+      "price": 699.99,
+      "image": "https://via.placeholder.com/300x200?text=OnePlus+11",
+      "description": "Fast performance smartphone with 120Hz display and fast charging.",
+      "category": "phones"
+    },
+    {
+      "id": 15,
+      "name": "Samsung Galaxy Buds Pro",
+      "price": 199.99,
+      "image": "https://via.placeholder.com/300x200?text=Samsung+Galaxy+Buds+Pro",
+      "description": "Premium wireless earbuds with active noise cancellation.",
+      "category": "accessories"
+    },
+    {
+      "id": 16,
+      "name": "Anker PowerCore Portable Charger",
+      "price": 49.99,
+      "image": "https://via.placeholder.com/300x200?text=Anker+PowerCore",
+      "description": "20,000mAh portable charger with fast charging technology.",
+      "category": "accessories"
+    },
+    {
+      "id": 17,
+      "name": "LG OLED 65\" TV",
+      "price": 1899.99,
+      "image": "https://via.placeholder.com/300x200?text=LG+OLED+65",
+      "description": "65-inch OLED TV with perfect blacks and stunning picture quality.",
+      "category": "tvs"
+    },
+    {
+      "id": 18,
+      "name": "Sony Bravia 55\" 4K TV",
+      "price": 1199.99,
+      "image": "https://via.placeholder.com/300x200?text=Sony+Bravia+55",
+      "description": "55-inch 4K UHD TV with HDR support and smart TV features.",
+      "category": "tvs"
+    },
+    {
+      "id": 19,
+      "name": "Apple iMac 24\"",
+      "price": 1299.99,
+      "image": "https://via.placeholder.com/300x200?text=Apple+iMac+24",
+      "description": "All-in-one desktop with M1 chip, 8GB RAM, and 256GB SSD.",
+      "category": "computers"
+    },
+    {
+      "id": 20,
+      "name": "Dell Alienware Gaming Desktop",
+      "price": 1799.99,
+      "image": "https://via.placeholder.com/300x200?text=Dell+Alienware",
+      "description": "High-performance gaming desktop with Intel Core i7 and RTX graphics.",
+      "category": "computers"
     }
   ],
   "cart": []
