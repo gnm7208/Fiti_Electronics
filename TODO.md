@@ -1,4 +1,4 @@
-# Fiti Electronics Development TODO
+ # Fiti Electronics Development TODO
 
 ## Plan Implementation Steps
 
@@ -16,7 +16,7 @@
 - [x] Create index.html
 - [x] Create styles.css
 - [x] Create script.js
-- [ ] Create db.json
+- [x] Create db.json
 - [ ] Create package.json
 - [ ] Set up and test JSON server
 - [ ] Test the application
