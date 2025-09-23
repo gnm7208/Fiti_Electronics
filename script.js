@@ -32,6 +32,16 @@ async function fetchProducts() {
     }
 }
 
+// Filter products by category
+function filterProducts(category) {
+    if (category === 'all') {
+        displayProducts(products);
+    } else {
+        const filteredProducts = products.filter(product => product.category === category);
+        displayProducts(filteredProducts);
+    }
+}
+
 // Display products in the grid
 function displayProducts(productsToShow) {
     productsGrid.innerHTML = '';
