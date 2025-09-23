@@ -1,4 +1,4 @@
- # Fiti Electronics Development TODO
+  # Fiti Electronics Development TODO
 
 ## Plan Implementation Steps
 
@@ -18,6 +18,7 @@
 - [x] Create script.js
 - [x] Create db.json
 - [x] Create package.json
-- [ ] Set up and test JSON server
-- [ ] Test the application
-- [ ] Prepare for deployment
+- [x] Set up and test JSON server
+- [x] Test the application
+- [x] Prepare for deployment
+- [x] Add category menu and filtering
