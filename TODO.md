@@ -14,7 +14,7 @@
 ## Progress Tracking
 
 - [x] Create index.html
-- [ ] Create styles.css
+- [x] Create styles.css
 - [ ] Create script.js
 - [ ] Create db.json
 - [ ] Create package.json
