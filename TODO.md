@@ -15,7 +15,7 @@
 
 - [x] Create index.html
 - [x] Create styles.css
-- [ ] Create script.js
+- [x] Create script.js
 - [ ] Create db.json
 - [ ] Create package.json
 - [ ] Set up and test JSON server
