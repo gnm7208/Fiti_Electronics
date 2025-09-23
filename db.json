@@ -5,42 +5,64 @@
       "name": "iPhone 14",
       "price": 999.99,
       "image": "https://via.placeholder.com/300x200?text=iPhone+14",
-      "description": "The latest iPhone with advanced camera and performance."
+      "description": "The latest iPhone with advanced camera and performance.",
+      "category": "phones"
     },
     {
       "id": 2,
       "name": "Samsung Galaxy S23",
       "price": 899.99,
       "image": "https://via.placeholder.com/300x200?text=Galaxy+S23",
-      "description": "High-end Android smartphone with excellent display."
+      "description": "High-end Android smartphone with excellent display.",
+      "category": "phones"
     },
     {
       "id": 3,
       "name": "MacBook Pro 16\"",
       "price": 2499.99,
       "image": "https://via.placeholder.com/300x200?text=MacBook+Pro",
-      "description": "Powerful laptop for professionals with M2 chip."
+      "description": "Powerful laptop for professionals with M2 chip.",
+      "category": "laptops"
     },
     {
       "id": 4,
       "name": "Dell XPS 13",
       "price": 1299.99,
       "image": "https://via.placeholder.com/300x200?text=Dell+XPS+13",
-      "description": "Ultra-portable laptop with stunning InfinityEdge display."
+      "description": "Ultra-portable laptop with stunning InfinityEdge display.",
+      "category": "laptops"
     },
     {
       "id": 5,
       "name": "Sony WH-1000XM5",
       "price": 399.99,
       "image": "https://via.placeholder.com/300x200?text=Sony+Headphones",
-      "description": "Premium noise-canceling wireless headphones."
+      "description": "Premium noise-canceling wireless headphones.",
+      "category": "accessories"
     },
     {
       "id": 6,
       "name": "Apple Watch Series 8",
       "price": 399.99,
       "image": "https://via.placeholder.com/300x200?text=Apple+Watch",
-      "description": "Advanced smartwatch with health monitoring features."
+      "description": "Advanced smartwatch with health monitoring features.",
+      "category": "accessories"
+    },
+    {
+      "id": 7,
+      "name": "Samsung 55\" QLED TV",
+      "price": 1299.99,
+      "image": "https://via.placeholder.com/300x200?text=Samsung+TV",
+      "description": "4K QLED TV with stunning picture quality.",
+      "category": "tvs"
+    },
+    {
+      "id": 8,
+      "name": "HP Desktop Computer",
+      "price": 899.99,
+      "image": "https://via.placeholder.com/300x200?text=HP+Desktop",
+      "description": "Reliable desktop computer for everyday use.",
+      "category": "computers"
     }
   ],
   "cart": []

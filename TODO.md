@@ -17,7 +17,7 @@
 - [x] Create styles.css
 - [x] Create script.js
 - [x] Create db.json
-- [ ] Create package.json
+- [x] Create package.json
 - [ ] Set up and test JSON server
 - [ ] Test the application
 - [ ] Prepare for deployment
