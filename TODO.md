@@ -1,0 +1,23 @@
+# Fiti Electronics Development TODO
+
+## Plan Implementation Steps
+
+1. **Create index.html** - Set up the main HTML structure with product catalog, cart section, and checkout simulation.
+2. **Create styles.css** - Develop responsive CSS inspired by zurimall.co.ke for layout, colors, and styling.
+3. **Create script.js** - Implement JavaScript for API interactions, event handling, and DOM updates.
+4. **Create db.json** - Set up sample product data and initial cart state for the JSON server.
+5. **Create package.json** - Add JSON server dependency and scripts.
+6. **Set up and test JSON server** - Install dependencies and run the server.
+7. **Test the application** - Verify functionality in a browser and ensure responsive design.
+8. **Prepare for deployment** - Add any necessary files for Netlify/Vercel deployment.
+
+## Progress Tracking
+
+- [x] Create index.html
+- [ ] Create styles.css
+- [ ] Create script.js
+- [ ] Create db.json
+- [ ] Create package.json
+- [ ] Set up and test JSON server
+- [ ] Test the application
+- [ ] Prepare for deployment
