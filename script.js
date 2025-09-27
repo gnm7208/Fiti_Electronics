@@ -113,6 +113,33 @@ async function removeFromCart(event) {
     } catch (error) {
         console.error('Error removing from cart:', error);
     }
+
+}
+
+// Clear entire cart
+async function clearCart() {
+    if (cart.length === 0) return;
+
+    try {
+        const deletePromises = cart.map(item =>
+            fetch(`${API_BASE}/cart/${item.id}`, {
+                method: 'DELETE',
+            })
+        );
+
+        const responses = await Promise.all(deletePromises);
+
+        const allOk = responses.every(response => response.ok);
+        if (allOk) {
+            cart = [];
+            updateCartDisplay();
+            updateCartCount();
+        } else {
+            console.error('Error clearing cart: Some items failed to delete');
+        }
+    } catch (error) {
+        console.error('Error clearing cart:', error);
+    }
 }
 
 // Update cart display
@@ -146,6 +173,25 @@ function updateCartCount() {
     cartCount.textContent = cart.length;
 }
 
+// Save cart to orders
+async function saveCart() {
+    if (cart.length === 0) return;
+    try {
+        const response = await fetch(`${API_BASE}/orders`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ items: cart, timestamp: new Date().toISOString() }),
+        });
+        if (!response.ok) {
+            console.error('Error saving cart');
+        }
+    } catch (error) {
+        console.error('Error saving cart:', error);
+    }
+}
+
 // Toggle cart sidebar
 function toggleCart() {
     cartSidebar.classList.toggle('hidden');
@@ -157,7 +203,13 @@ function closeCart() {
 }
 
 // Show checkout modal
-function showCheckoutModal() {
+async function showCheckoutModal() {
+    if (cart.length === 0) {
+        alert('Your cart is empty. Add some products before checking out.');
+        return;
+    }
+    await saveCart();
+    await clearCart();
     checkoutModal.classList.remove('hidden');
 }
 

@@ -1,27 +1,16 @@
-  # Fiti Electronics Development TODO
+# TODO: Fix Cart Clearing on Checkout
 
-## Plan Implementation Steps
-
-1. **Create index.html** - Set up the main HTML structure with product catalog, cart section, and checkout simulation.
-2. **Create styles.css** - Develop responsive CSS inspired by https://zurimall.co.ke/ for layout, colors, and styling.
-3. **Create script.js** - Implement JavaScript for API interactions, event handling, and DOM updates.
-4. **Create db.json** - Set up sample product data and initial cart state for the JSON server.
-5. **Create package.json** - Add JSON server dependency and scripts.
-6. **Set up and test JSON server** - Install dependencies and run the server.
-7. **Test the application** - Verify functionality in a browser and ensure responsive design.
-8. **Prepare for deployment** - Add any necessary files for Netlify/Vercel deployment.
+## Steps to Complete
+- [x] Edit script.js: Update clearCart() function to use individual DELETE /cart/:id for each item with Promise.all, instead of collection-level DELETE/PUT (which 404 in JSON Server).
+- [x] Start JSON Server: Run `npm start` to serve the API on port 3000.
+- [x] Start static server if needed: Ensure Python HTTP server on port 8080 for serving HTML/CSS/JS.
+- [x] Launch browser: Open http://localhost:8080/index.html and verify products load via API.
+- [x] Test add to cart: Click "Add to Cart" on a product, open cart sidebar, confirm item appears and count updates.
+- [x] Test checkout: With items in cart, click "Checkout" button; verify modal shows, cart empties in sidebar, and local state updates.
+- [x] Verify API changes: Use curl to check /cart is empty [] and /orders has a new entry with the purchased items.
+- [x] Test edge cases: Attempt checkout with empty cart (should alert), reload page to confirm fetchCart() loads empty cart.
+- [x] Update TODO.md: Mark steps as completed and note any issues.
 
 ## Progress Tracking
-
-- [x] Create index.html
-- [x] Create styles.css
-- [x] Create script.js
-- [x] Create db.json
-- [x] Create package.json
-- [x] Set up and test JSON server
-- [x] Test the application
-- [x] Prepare for deployment
-- [x] Add category menu and filtering
-- [x] Add more laptop products (HP ProBook 445 G9, MacBook Air M2, Lenovo X1 Carbon, HP EliteBook 1040)
-- [x] Add more products to other categories (Phones: Google Pixel 7 Pro, OnePlus 11; Accessories: Samsung Galaxy Buds Pro, Anker PowerCore; TVs: LG OLED 65", Sony Bravia 55"; Computers: Apple iMac 24", Dell Alienware Gaming Desktop)
-- [x] Add more products to db.json (iPhone 15, ASUS ROG Strix Gaming Laptop, Bose QuietComfort Earbuds, TCL 65" 4K QLED TV, Apple Mac Mini M2)
+- Started: Current time
+- Completed: To be updated

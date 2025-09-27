@@ -4,7 +4,7 @@
       "id": 1,
       "name": "iPhone 14",
       "price": 999.99,
-      "image": "https://via.placeholder.com/300x200?text=iPhone+14",
+      "image": "images/phone-1.png",
       "description": "The latest iPhone with advanced camera and performance.",
       "category": "phones"
     },
@@ -12,15 +12,15 @@
       "id": 2,
       "name": "Samsung Galaxy S23",
       "price": 899.99,
-      "image": "https://via.placeholder.com/300x200?text=Galaxy+S23",
+      "image": "images/phone-2.png",
       "description": "High-end Android smartphone with excellent display.",
       "category": "phones"
     },
     {
       "id": 3,
-      "name": "MacBook Pro 16\"",
+      "name": "MacBook Pro 16",
       "price": 2499.99,
-      "image": "https://via.placeholder.com/300x200?text=MacBook+Pro",
+      "image": "images/laptop-14.png",
       "description": "Powerful laptop for professionals with M2 chip.",
       "category": "laptops"
     },
@@ -28,7 +28,7 @@
       "id": 4,
       "name": "Dell XPS 13",
       "price": 1299.99,
-      "image": "https://via.placeholder.com/300x200?text=Dell+XPS+13",
+      "image": "images/laptop-2.png",
       "description": "Ultra-portable laptop with stunning InfinityEdge display.",
       "category": "laptops"
     },
@@ -36,7 +36,7 @@
       "id": 5,
       "name": "Sony WH-1000XM5",
       "price": 399.99,
-      "image": "https://via.placeholder.com/300x200?text=Sony+Headphones",
+      "image": "images/headphones-1.png",
       "description": "Premium noise-canceling wireless headphones.",
       "category": "accessories"
     },
@@ -44,7 +44,7 @@
       "id": 6,
       "name": "Apple Watch Series 8",
       "price": 399.99,
-      "image": "https://via.placeholder.com/300x200?text=Apple+Watch",
+      "image": "images/watch-1.png",
       "description": "Advanced smartwatch with health monitoring features.",
       "category": "accessories"
     },
@@ -52,7 +52,7 @@
       "id": 7,
       "name": "Samsung 55\" QLED TV",
       "price": 1299.99,
-      "image": "https://via.placeholder.com/300x200?text=Samsung+TV",
+      "image": "images/tv-1.png",
       "description": "4K QLED TV with stunning picture quality.",
       "category": "tvs"
     },
@@ -60,7 +60,7 @@
       "id": 8,
       "name": "HP Desktop Computer",
       "price": 899.99,
-      "image": "https://via.placeholder.com/300x200?text=HP+Desktop",
+      "image": "images/computer-4.png",
       "description": "Reliable desktop computer for everyday use.",
       "category": "computers"
     },
@@ -68,7 +68,7 @@
       "id": 9,
       "name": "HP ProBook 445 G9 Ryzen 7",
       "price": 899.99,
-      "image": "https://via.placeholder.com/300x200?text=HP+ProBook+445+G9",
+      "image": "images/laptop-3.png",
       "description": "Business laptop with AMD Ryzen 7 processor, 16GB RAM, and 512GB SSD.",
       "category": "laptops"
     },
@@ -76,7 +76,7 @@
       "id": 10,
       "name": "MacBook Air M2",
       "price": 1199.99,
-      "image": "https://via.placeholder.com/300x200?text=MacBook+Air+M2",
+      "image": "images/laptop-4.png",
       "description": "Ultra-light laptop with Apple M2 chip, 8GB RAM, and 256GB SSD.",
       "category": "laptops"
     },
@@ -84,7 +84,7 @@
       "id": 11,
       "name": "Lenovo ThinkPad X1 Carbon Core i7",
       "price": 1499.99,
-      "image": "https://via.placeholder.com/300x200?text=Lenovo+X1+Carbon",
+      "image": "images/laptop-5.png",
       "description": "Premium business laptop with Intel Core i7, 16GB RAM, and 512GB SSD.",
       "category": "laptops"
     },
@@ -92,7 +92,7 @@
       "id": 12,
       "name": "HP EliteBook 1040 Core i7",
       "price": 1299.99,
-      "image": "https://via.placeholder.com/300x200?text=HP+EliteBook+1040",
+      "image": "images/laptop-6.png",
       "description": "Professional laptop with Intel Core i7, 16GB RAM, and 512GB SSD.",
       "category": "laptops"
     },
@@ -100,7 +100,7 @@
       "id": 13,
       "name": "Google Pixel 7 Pro",
       "price": 899.99,
-      "image": "https://via.placeholder.com/300x200?text=Google+Pixel+7+Pro",
+      "image": "images/phone-3.png",
       "description": "Android smartphone with exceptional camera and pure Google experience.",
       "category": "phones"
     },
@@ -108,7 +108,7 @@
       "id": 14,
       "name": "OnePlus 11",
       "price": 699.99,
-      "image": "https://via.placeholder.com/300x200?text=OnePlus+11",
+      "image": "images/phone-4.png",
       "description": "Fast performance smartphone with 120Hz display and fast charging.",
       "category": "phones"
     },
@@ -116,7 +116,7 @@
       "id": 15,
       "name": "Samsung Galaxy Buds Pro",
       "price": 199.99,
-      "image": "https://via.placeholder.com/300x200?text=Samsung+Galaxy+Buds+Pro",
+      "image": "images/earbuds-4.png",
       "description": "Premium wireless earbuds with active noise cancellation.",
       "category": "accessories"
     },
@@ -124,7 +124,7 @@
       "id": 16,
       "name": "Anker PowerCore Portable Charger",
       "price": 49.99,
-      "image": "https://via.placeholder.com/300x200?text=Anker+PowerCore",
+      "image": "images/earbuds-1.png",
       "description": "20,000mAh portable charger with fast charging technology.",
       "category": "accessories"
     },
@@ -132,7 +132,7 @@
       "id": 17,
       "name": "LG OLED 65\" TV",
       "price": 1899.99,
-      "image": "https://via.placeholder.com/300x200?text=LG+OLED+65",
+      "image": "images/tv-2.png",
       "description": "65-inch OLED TV with perfect blacks and stunning picture quality.",
       "category": "tvs"
     },
@@ -140,7 +140,7 @@
       "id": 18,
       "name": "Sony Bravia 55\" 4K TV",
       "price": 1199.99,
-      "image": "https://via.placeholder.com/300x200?text=Sony+Bravia+55",
+      "image": "images/tv-3.png",
       "description": "55-inch 4K UHD TV with HDR support and smart TV features.",
       "category": "tvs"
     },
@@ -148,7 +148,7 @@
       "id": 19,
       "name": "Apple iMac 24\"",
       "price": 1299.99,
-      "image": "https://via.placeholder.com/300x200?text=Apple+iMac+24",
+      "image": "images/computer-2.png",
       "description": "All-in-one desktop with M1 chip, 8GB RAM, and 256GB SSD.",
       "category": "computers"
     },
@@ -156,7 +156,7 @@
       "id": 20,
       "name": "Dell Alienware Gaming Desktop",
       "price": 1799.99,
-      "image": "https://via.placeholder.com/300x200?text=Dell+Alienware",
+      "image": "images/computer-3.png",
       "description": "High-performance gaming desktop with Intel Core i7 and RTX graphics.",
       "category": "computers"
     },
@@ -164,7 +164,7 @@
       "id": 21,
       "name": "iPhone 15",
       "price": 1099.99,
-      "image": "https://via.placeholder.com/300x200?text=iPhone+15",
+      "image": "images/phone-5.png",
       "description": "Latest iPhone with advanced camera system and A17 Pro chip.",
       "category": "phones"
     },
@@ -172,7 +172,7 @@
       "id": 22,
       "name": "ASUS ROG Strix Gaming Laptop",
       "price": 1599.99,
-      "image": "https://via.placeholder.com/300x200?text=ASUS+ROG+Strix",
+      "image": "images/laptop-7.png",
       "description": "High-performance gaming laptop with AMD Ryzen 9 and RTX 4070.",
       "category": "laptops"
     },
@@ -180,7 +180,7 @@
       "id": 23,
       "name": "Bose QuietComfort Earbuds",
       "price": 279.99,
-      "image": "https://via.placeholder.com/300x200?text=Bose+QuietComfort",
+      "image": "images/earbuds-2.png",
       "description": "Premium wireless earbuds with world-class noise cancellation.",
       "category": "accessories"
     },
@@ -188,7 +188,7 @@
       "id": 24,
       "name": "TCL 65\" 4K QLED TV",
       "price": 899.99,
-      "image": "https://via.placeholder.com/300x200?text=TCL+65+4K",
+      "image": "images/tv-4.png",
       "description": "65-inch 4K QLED TV with HDR and smart TV features.",
       "category": "tvs"
     },
@@ -196,10 +196,548 @@
       "id": 25,
       "name": "Apple Mac Mini M2",
       "price": 599.99,
-      "image": "https://via.placeholder.com/300x200?text=Mac+Mini+M2",
+      "image": "images/computer-2.png",
       "description": "Compact desktop computer with M2 chip, perfect for everyday tasks.",
+      "category": "computers"
+    },
+    {
+      "id": 26,
+      "name": "iPhone 13 Pro",
+      "price": 899.99,
+      "image": "images/phone-6.png",
+      "description": "Premium iPhone with Pro camera system and stainless steel design.",
+      "category": "phones"
+    },
+    {
+      "id": 27,
+      "name": "Samsung Galaxy Z Fold 5",
+      "price": 1799.99,
+      "image": "images/phone-7.png",
+      "description": "Foldable smartphone with large inner screen and multitasking capabilities.",
+      "category": "phones"
+    },
+    {
+      "id": 28,
+      "name": "Google Pixel 8",
+      "price": 699.99,
+      "image": "images/phone-8.png",
+      "description": "Pure Android experience with exceptional computational photography.",
+      "category": "phones"
+    },
+    {
+      "id": 29,
+      "name": "OnePlus 12",
+      "price": 799.99,
+      "image": "images/phone-9.png",
+      "description": "Flagship smartphone with ultra-fast charging and smooth performance.",
+      "category": "phones"
+    },
+    {
+      "id": 30,
+      "name": "Xiaomi 14",
+      "price": 649.99,
+      "image": "images/phone-10.png",
+      "description": "High-performance smartphone with Leica camera partnership.",
+      "category": "phones"
+    },
+    {
+      "id": 31,
+      "name": "Huawei P60 Pro",
+      "price": 999.99,
+      "image": "images/phone-11.png",
+      "description": "Premium smartphone with advanced camera technology and elegant design.",
+      "category": "phones"
+    },
+    {
+      "id": 32,
+      "name": "Motorola Edge 40",
+      "price": 599.99,
+      "image": "images/phone-12.png",
+      "description": "Curved display smartphone with 144Hz refresh rate and IP68 rating.",
+      "category": "phones"
+    },
+    {
+      "id": 33,
+      "name": "Sony Xperia 5 V",
+      "price": 899.99,
+      "image": "images/phone-13.png",
+      "description": "Compact flagship with professional camera features and 4K display.",
+      "category": "phones"
+    },
+    {
+      "id": 34,
+      "name": "Motorolla C113",
+      "price": 599.99,
+      "image": "images/phone-14.png",
+      "description": "Unique transparent design with Glyph interface and clean Android experience.",
+      "category": "phones"
+    },
+    {
+      "id": 35,
+      "name": "ASUS Zenfone 10",
+      "price": 699.99,
+      "image": "images/phone-15.png",
+      "description": "Compact flagship smartphone with headphone jack and wireless charging.",
+      "category": "phones"
+    },
+    {
+      "id": 36,
+      "name": "Microsoft Surface Laptop 5",
+      "price": 999.99,
+      "image": "images/HP-Elite.png",
+      "description": "Premium 2-in-1 laptop with Intel 12th gen processors and all-day battery.",
+      "category": "laptops"
+    },
+    {
+      "id": 37,
+      "name": "Lenovo Yoga 9i",
+      "price": 1399.99,
+      "image": "images/HP-Elitebook.png",
+      "description": "Convertible laptop with 360-degree hinge and Intel Evo certification.",
+      "category": "laptops"
+    },
+    {
+      "id": 38,
+      "name": "Acer Swift 3",
+      "price": 699.99,
+      "image": "images/HP-Probook.png",
+      "description": "Thin and light laptop with AMD Ryzen processors and long battery life.",
+      "category": "laptops"
+    },
+    {
+      "id": 39,
+      "name": "MSI Creator Z16",
+      "price": 2299.99,
+      "image": "images/laptop-8.png",
+      "description": "Professional laptop for content creators with high-end graphics and color accuracy.",
+      "category": "laptops"
+    },
+    {
+      "id": 40,
+      "name": "Razer Blade 15",
+      "price": 1999.99,
+      "image": "images/laptop-9.png",
+      "description": "Gaming laptop with RTX graphics and high refresh rate display.",
+      "category": "laptops"
+    },
+    {
+      "id": 41,
+      "name": "Samsung Galaxy Book 3",
+      "price": 899.99,
+      "image": "images/laptop-10.png",
+      "description": "Productivity laptop with AMOLED display and S Pen support.",
+      "category": "laptops"
+    },
+    {
+      "id": 42,
+      "name": "Dell Inspiron 14",
+      "price": 649.99,
+      "image": "images/laptop-12.png",
+      "description": "Affordable laptop with Intel processors and comfortable keyboard.",
+      "category": "laptops"
+    },
+    {
+      "id": 43,
+      "name": "Apple MacBook Pro 14\" M3",
+      "price": 1999.99,
+      "image": "images/laptop-12.png",
+      "description": "Professional laptop with M3 chip, perfect for creative work.",
+      "category": "laptops"
+    },
+    {
+      "id": 44,
+      "name": "HP Spectre x360",
+      "price": 1299.99,
+      "image": "images/laptop-13.png",
+      "description": "Premium convertible laptop with gem-cut design and all-day battery.",
+      "category": "laptops"
+    },
+    {
+      "id": 45,
+      "name": "LG Gram 17",
+      "price": 1499.99,
+      "image": "images/laptop-14.png",
+      "description": "Ultra-lightweight 17-inch laptop with exceptional portability.",
+      "category": "laptops"
+    },
+    {
+      "id": 46,
+      "name": "Logitech MX Master 3S",
+      "price": 99.99,
+      "image": "images/mouse-1.png",
+      "description": "Advanced wireless mouse with hyper-fast scrolling and ergonomic design.",
+      "category": "accessories"
+    },
+    {
+      "id": 47,
+      "name": "Apple Magic Keyboard",
+      "price": 299.99,
+      "image": "images/keyboard-1.png",
+      "description": "Wireless keyboard with scissor mechanism and backlit keys.",
+      "category": "accessories"
+    },
+    {
+      "id": 48,
+      "name": "Samsung Galaxy Watch 6",
+      "price": 399.99,
+      "image": "images/watch-2.png",
+      "description": "Advanced smartwatch with health monitoring and GPS tracking.",
+      "category": "accessories"
+    },
+    {
+      "id": 49,
+      "name": "Jabra Elite 85h",
+      "price": 249.99,
+      "image": "images/headphones-2.png",
+      "description": "Premium wireless headphones with active noise cancellation.",
+      "category": "accessories"
+    },
+    {
+      "id": 50,
+      "name": "Anker Soundcore Life Q30",
+      "price": 79.99,
+      "image": "images/headphones-3.png",
+      "description": "Affordable wireless headphones with 40-hour battery life.",
+      "category": "accessories"
+    },
+    {
+      "id": 51,
+      "name": "Belkin USB-C Hub",
+      "price": 69.99,
+      "image": "images/USB-C_hub.png",
+      "description": "7-in-1 USB-C hub with HDMI, USB-A, and card reader ports.",
+      "category": "accessories"
+    },
+    {
+      "id": 52,
+      "name": "Razer DeathAdder V3",
+      "price": 99.99,
+      "image": "images/mouse-2.png",
+      "description": "Gaming mouse with 30K DPI sensor and ergonomic design.",
+      "category": "accessories"
+    },
+    {
+      "id": 53,
+      "name": "Corsair K70 RGB Pro",
+      "price": 159.99,
+      "image": "images/keyboard-2.png",
+      "description": "Mechanical gaming keyboard with Cherry MX switches and RGB lighting.",
+      "category": "accessories"
+    },
+    {
+      "id": 54,
+      "name": "Sony WF-1000XM5",
+      "price": 299.99,
+      "image": "images/earbuds-4.png",
+      "description": "True wireless earbuds with industry-leading noise cancellation.",
+      "category": "accessories"
+    },
+    {
+      "id": 55,
+      "name": "Microsoft Surface Pen",
+      "price": 99.99,
+      "image": "images/Surface-pen.png",
+      "description": "Digital pen with 4096 levels of pressure sensitivity.",
+      "category": "accessories"
+    },
+    {
+      "id": 56,
+      "name": "Hisense 75\" U8K TV",
+      "price": 1499.99,
+      "image": "images/tv-5.png",
+      "description": "75-inch Mini-LED TV with quantum dot technology and 120Hz refresh rate.",
+      "category": "tvs"
+    },
+    {
+      "id": 57,
+      "name": "Vizio 65\" Quantum TV",
+      "price": 799.99,
+      "image": "images/tv-6.png",
+      "description": "65-inch 4K TV with quantum color technology and smart features.",
+      "category": "tvs"
+    },
+    {
+      "id": 58,
+      "name": "Panasonic 55\" OLED TV",
+      "price": 1299.99,
+      "image": "images/tv-7.png",
+      "description": "55-inch OLED TV with filmmaker mode and Dolby Vision IQ.",
+      "category": "tvs"
+    },
+    {
+      "id": 59,
+      "name": "Sharp 70\" 4K TV",
+      "price": 899.99,
+      "image": "images/tv-8.png",
+      "description": "70-inch 4K UHD TV with HDR support and built-in streaming apps.",
+      "category": "tvs"
+    },
+    {
+      "id": 60,
+      "name": "Philips 65\" Ambilight TV",
+      "price": 1199.99,
+      "image": "images/tv-9.png",
+      "description": "65-inch TV with Ambilight technology for immersive viewing experience.",
+      "category": "tvs"
+    },
+    {
+      "id": 61,
+      "name": "Toshiba 55\" Fire TV",
+      "price": 449.99,
+      "image": "images/tv-10.png",
+      "description": "55-inch 4K TV with built-in Fire TV and Alexa voice control.",
+      "category": "tvs"
+    },
+    {
+      "id": 62,
+      "name": "Insignia 50\" 4K TV",
+      "price": 299.99,
+      "image": "images/tv-11.png",
+      "description": "50-inch 4K UHD TV with smart TV capabilities and multiple HDMI ports.",
+      "category": "tvs"
+    },
+    {
+      "id": 63,
+      "name": "Element 65\" 4K TV",
+      "price": 399.99,
+      "image": "images/tv-13.png",
+      "description": "65-inch 4K TV with Roku TV built-in for easy streaming.",
+      "category": "tvs"
+    },
+    {
+      "id": 64,
+      "name": "Westinghouse 55\" 4K TV",
+      "price": 349.99,
+      "image": "images/tv-14.png",
+      "description": "55-inch 4K TV with HDR support and smart TV features.",
+      "category": "tvs"
+    },
+    {
+      "id": 65,
+      "name": "Sceptre 50\" 4K TV",
+      "price": 279.99,
+      "image": "images/tv-15.png",
+      "description": "50-inch 4K UHD TV with multiple connectivity options.",
+      "category": "tvs"
+    },
+    {
+      "id": 66,
+      "name": "Lenovo Legion Tower 5",
+      "price": 1199.99,
+      "image": "images/computer-1.png",
+      "description": "Gaming desktop with AMD Ryzen 7 and NVIDIA RTX graphics.",
+      "category": "computers"
+    },
+    {
+      "id": 67,
+      "name": "HP Omen Gaming Desktop",
+      "price": 1399.99,
+      "image": "images/computer-3.png",
+      "description": "High-performance gaming PC with Intel Core i7 and RTX 4070.",
+      "category": "computers"
+    },
+    {
+      "id": 68,
+      "name": "Apple Mac Studio",
+      "price": 1999.99,
+      "image": "images/computer-4.png",
+      "description": "Compact powerhouse with M2 Max chip for professional workflows.",
+      "category": "computers"
+    },
+    {
+      "id": 69,
+      "name": "Dell OptiPlex Desktop",
+      "price": 699.99,
+      "image": "images/computer-5.png",
+      "description": "Business desktop with Intel processors and enterprise security features.",
+      "category": "computers"
+    },
+    {
+      "id": 70,
+      "name": "ASUS ROG Gaming Desktop",
+      "price": 1599.99,
+      "image": "images/computer-6.png",
+      "description": "Gaming desktop with AMD Ryzen 9 and high-end graphics card.",
+      "category": "computers"
+    },
+    {
+      "id": 71,
+      "name": "CyberPowerPC Gaming PC",
+      "price": 1299.99,
+      "image": "images/computer-7.png",
+      "description": "Custom gaming PC with RGB lighting and liquid cooling.",
+      "category": "computers"
+    },
+    {
+      "id": 72,
+      "name": "iMac 27\" 5K",
+      "price": 1799.99,
+      "image": "images/computer-8.png",
+      "description": "27-inch all-in-one desktop with 5K Retina display and M1 chip.",
+      "category": "computers"
+    },
+    {
+      "id": 73,
+      "name": "Microsoft Surface Studio 2",
+      "price": 3499.99,
+      "image": "images/computer-9.png",
+      "description": "All-in-one PC with 28-inch touchscreen and Surface Pen support.",
+      "category": "computers"
+    },
+    {
+      "id": 74,
+      "name": "Raspberry Pi 4",
+      "price": 55.99,
+      "image": "images/computer-10.png",
+      "description": "Single-board computer for DIY projects and education.",
+      "category": "computers"
+    },
+    {
+      "id": 75,
+      "name": "Intel NUC Mini PC",
+      "price": 399.99,
+      "image": "images/computer-11.png",
+      "description": "Ultra-compact PC with Intel processors and customizable options.",
       "category": "computers"
     }
   ],
-  "cart": []
+  "cart": [],
+  "orders": [
+    {
+      "items": [
+        {
+          "id": 1,
+          "name": "iPhone 14",
+          "price": 999.99,
+          "image": "images/iphone-14.jpg",
+          "description": "The latest iPhone with advanced camera and performance.",
+          "category": "phones"
+        },
+        {
+          "id": 24,
+          "name": "TCL 65\" 4K QLED TV",
+          "price": 899.99,
+          "image": "https://via.placeholder.com/300x200?text=TCL+65+4K+QLED+TV",
+          "description": "65-inch 4K QLED TV with HDR and smart TV features.",
+          "category": "tvs"
+        },
+        {
+          "id": 23,
+          "name": "Bose QuietComfort Earbuds",
+          "price": 279.99,
+          "image": "https://via.placeholder.com/300x200?text=Bose+QuietComfort+Earbuds",
+          "description": "Premium wireless earbuds with world-class noise cancellation.",
+          "category": "accessories"
+        }
+      ],
+      "timestamp": "2025-09-25T19:34:41.642Z",
+      "id": 1
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "name": "iPhone 14",
+          "price": 999.99,
+          "image": "images/iphone-14.jpg",
+          "description": "The latest iPhone with advanced camera and performance.",
+          "category": "phones"
+        }
+      ],
+      "timestamp": "2023-10-01T00:00:00.000Z",
+      "id": 2
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "name": "iPhone 14",
+          "price": 999.99,
+          "image": "images/iphone-14.jpg",
+          "description": "The latest iPhone with advanced camera and performance.",
+          "category": "phones"
+        },
+        {
+          "id": 2,
+          "name": "Samsung Galaxy S23",
+          "price": 899.99,
+          "image": "images/samsung-galaxy-s23.jpg",
+          "description": "High-end Android smartphone with excellent display.",
+          "category": "phones"
+        },
+        {
+          "id": 3,
+          "name": "MacBook Pro 16\"",
+          "price": 2499.99,
+          "image": "images/macbook-pro-16.jpg",
+          "description": "Powerful laptop for professionals with M2 chip.",
+          "category": "laptops"
+        },
+        {
+          "id": 4,
+          "name": "Dell XPS 13",
+          "price": 1299.99,
+          "image": "images/dell-xps-13.jpg",
+          "description": "Ultra-portable laptop with stunning InfinityEdge display.",
+          "category": "laptops"
+        }
+      ],
+      "timestamp": "2025-09-25T20:21:32.838Z",
+      "id": 3
+    },
+    {
+      "items": [
+        {
+          "id": 23,
+          "name": "Bose QuietComfort Earbuds",
+          "price": 279.99,
+          "image": "images/earbuds-2.png",
+          "description": "Premium wireless earbuds with world-class noise cancellation.",
+          "category": "accessories"
+        },
+        {
+          "id": 4,
+          "name": "Dell XPS 13",
+          "price": 1299.99,
+          "image": "images/laptop-2.png",
+          "description": "Ultra-portable laptop with stunning InfinityEdge display.",
+          "category": "laptops"
+        },
+        {
+          "id": 3,
+          "name": "MacBook Pro 16",
+          "price": 2499.99,
+          "image": "images/laptop-14.png",
+          "description": "Powerful laptop for professionals with M2 chip.",
+          "category": "laptops"
+        },
+        {
+          "id": 10,
+          "name": "MacBook Air M2",
+          "price": 1199.99,
+          "image": "images/laptop-4.png",
+          "description": "Ultra-light laptop with Apple M2 chip, 8GB RAM, and 256GB SSD.",
+          "category": "laptops"
+        },
+        {
+          "id": 21,
+          "name": "iPhone 15",
+          "price": 1099.99,
+          "image": "images/phone-5.png",
+          "description": "Latest iPhone with advanced camera system and A17 Pro chip.",
+          "category": "phones"
+        },
+        {
+          "id": 56,
+          "name": "Hisense 75\" U8K TV",
+          "price": 1499.99,
+          "image": "images/tv-5.png",
+          "description": "75-inch Mini-LED TV with quantum dot technology and 120Hz refresh rate.",
+          "category": "tvs"
+        }
+      ],
+      "timestamp": "2025-09-27T19:39:26.941Z",
+      "id": 4
+    }
+  ]
 }
