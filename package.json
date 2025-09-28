@@ -4,7 +4,7 @@
   "description": "A mini e-commerce web app for electronics",
   "main": "index.js",
   "scripts": {
-    "start": "json-server db.json",
+    "start": "json-server --port $PORT db.json",
     "dev": "json-server --watch db.json --port 3000 --host 0.0.0.0"
   },
   "dependencies": {
