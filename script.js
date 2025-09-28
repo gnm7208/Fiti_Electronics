@@ -20,11 +20,12 @@ let products = [];
 // API base URL
 const API_BASE = 'http://localhost:3000';
 
-// Fetch products from JSON server
+// Fetch products from local db.json
 async function fetchProducts() {
     try {
-        const response = await fetch(`${API_BASE}/products`);
-        products = await response.json();
+        const response = await fetch('./db.json');
+        const data = await response.json();
+        products = data.products;
         displayProducts(products);
     } catch (error) {
         console.error('Error fetching products:', error);
