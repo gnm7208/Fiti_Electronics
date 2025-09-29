@@ -18,7 +18,7 @@ let cart = [];
 let products = [];
 
 // API base URL
-const API_BASE = 'http://localhost:3000';
+const API_BASE = '';
 
 // Fetch products from local db.json
 async function fetchProducts() {

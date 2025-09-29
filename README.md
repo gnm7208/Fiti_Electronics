@@ -37,25 +37,20 @@ A mini e-commerce web application for browsing and purchasing electronics.
    ```bash
    npm run dev
    ```
-   This starts the API server on `http://localhost:3000` with watch mode enabled.
+   This starts the API server on `http://localhost:3000` with watch mode enabled, serving both API and static files.
 
    For production-like deployment (uses $PORT env var):
    ```bash
    npm start
    ```
 
-2. Serve the frontend:
-   - Option 1: Open `index.html` directly in your browser
-   - Option 2: Start a local static server using Node.js (recommended):
+2. Access the app:
+   - Open `http://localhost:3000/index.html` (served by json-server with `--static .`).
+   - Or use a separate static server:
      ```bash
      npm run serve
      ```
-     This starts the server on `http://localhost:8080`.
-   - Option 3: Using Python:
-     ```bash
-     python -m http.server 8080
-     ```
-     Then open `http://localhost:8080` in your browser.
+     Then open `http://localhost:8080/index.html` (API at `http://localhost:3000`).
 
 3. Use the application:
    - Browse products using category filters
@@ -66,7 +61,7 @@ A mini e-commerce web application for browsing and purchasing electronics.
 
 ## API Endpoints
 
-The application uses JSON Server to provide RESTful API endpoints:
+The application uses JSON Server to provide RESTful API endpoints (relative URLs for deployment):
 
 - `GET /products` - Retrieve all products
 - `GET /cart` - Retrieve current cart items
@@ -74,6 +69,31 @@ The application uses JSON Server to provide RESTful API endpoints:
 - `DELETE /cart/:id` - Remove a specific item from the cart
 - `GET /orders` - Retrieve order history
 - `POST /orders` - Create a new order (checkout)
+
+## Deployment
+
+### Local Development
+- Run `npm run dev` to start json-server serving API and static files on port 3000.
+- Access at `http://localhost:3000/index.html`.
+
+### Render Deployment
+1. Connect your GitHub repo to Render.
+2. Set **Build Command**: Empty (or `npm install`).
+3. Set **Start Command**: `npm start`.
+4. Environment: Node.
+5. The app will be live at your Render URL (e.g., `https://your-app.onrender.com/index.html`).
+   - Static files and API are served together via `--static .`.
+   - Relative URLs ensure API calls work on the deployed domain.
+   - db.json provides persistent data (updates on commits).
+
+Note: Render free tier spins down after inactivity; upgrade for always-on.
+
+## Recent Updates
+- Added `--static .` to json-server scripts for serving frontend files.
+- Changed API_BASE to relative URLs in script.js for deployment compatibility.
+- Fixed cart clearing on checkout using individual DELETE requests.
+- Thorough testing: Add/remove cart, checkout, search/filters, edge cases all work.
+
 
 ## Project Structure
 

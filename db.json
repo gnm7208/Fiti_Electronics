@@ -601,7 +601,16 @@
       "category": "computers"
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": 1,
+      "name": "iPhone 14",
+      "price": 999.99,
+      "image": "images/phone-1.png",
+      "description": "The latest iPhone with advanced camera and performance.",
+      "category": "phones"
+    }
+  ],
   "orders": [
     {
       "items": [
