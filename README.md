@@ -1,4 +1,4 @@
-# Fiti Electronics
+# 👍 Fiti Electronics
 
 A mini e-commerce web application for browsing and purchasing electronics.
 
