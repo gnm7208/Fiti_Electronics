@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "json-server --port $PORT db.json",
-    "dev": "json-server --watch db.json --port 3000 --host 0.0.0.0"
+    "dev": "json-server --watch db.json --port 3000 --host 0.0.0.0",
+    "serve": "http-server -p 8080"
   },
   "dependencies": {
     "json-server": "^0.17.4"
   },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
   "keywords": ["ecommerce", "electronics", "json-server"],
-  "author": "Your Name",
+  "author": "Mukirai George",
   "license": "MIT"
 }

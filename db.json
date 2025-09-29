@@ -738,6 +738,36 @@
       ],
       "timestamp": "2025-09-27T19:39:26.941Z",
       "id": 4
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "name": "iPhone 14",
+          "price": 999.99,
+          "image": "images/phone-1.png",
+          "description": "The latest iPhone with advanced camera and performance.",
+          "category": "phones"
+        },
+        {
+          "id": 2,
+          "name": "Samsung Galaxy S23",
+          "price": 899.99,
+          "image": "images/phone-2.png",
+          "description": "High-end Android smartphone with excellent display.",
+          "category": "phones"
+        },
+        {
+          "id": 3,
+          "name": "MacBook Pro 16",
+          "price": 2499.99,
+          "image": "images/laptop-14.png",
+          "description": "Powerful laptop for professionals with M2 chip.",
+          "category": "laptops"
+        }
+      ],
+      "timestamp": "2025-09-29T00:02:50.329Z",
+      "id": 5
     }
   ]
 }
