@@ -2,6 +2,11 @@
 
 A mini e-commerce web application for browsing and purchasing electronics.
 
+## 🌍 Live Demo Links
+
+- Netlify: [https://fiti.netlify.app]  
+- Render: [https://fiti-electronics.onrender.com]
+
 ## Features
 
 - Browse products by categories (All, Computers, Laptops, Phones, TVs, Accessories)
