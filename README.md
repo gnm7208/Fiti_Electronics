@@ -33,19 +33,29 @@ A mini e-commerce web application for browsing and purchasing electronics.
 
 ## Usage
 
-1. Start the JSON Server backend:
+1. Start the JSON Server backend (development mode):
+   ```bash
+   npm run dev
+   ```
+   This starts the API server on `http://localhost:3000` with watch mode enabled.
+
+   For production-like deployment (uses $PORT env var):
    ```bash
    npm start
    ```
-   This starts the API server on `http://localhost:3000`
 
 2. Serve the frontend:
    - Option 1: Open `index.html` directly in your browser
-   - Option 2: Start a local static server (e.g., using Python):
+   - Option 2: Start a local static server using Node.js (recommended):
+     ```bash
+     npm run serve
+     ```
+     This starts the server on `http://localhost:8080`.
+   - Option 3: Using Python:
      ```bash
      python -m http.server 8080
      ```
-     Then open `http://localhost:8080` in your browser
+     Then open `http://localhost:8080` in your browser.
 
 3. Use the application:
    - Browse products using category filters
