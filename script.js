@@ -1,3 +1,17 @@
+// Main entry point: DOM wiring + persistence. Pure cart logic lives in
+// js/cart.js and utilities in js/utils.js so they can be unit-tested.
+
+import {
+    addItem,
+    incrementItem,
+    decrementItem,
+    removeItem,
+    itemCount,
+    cartTotal,
+    normalizeCart,
+} from './js/cart.js';
+import { escapeHtml } from './js/utils.js';
+
 // DOM elements
 const productsGrid = document.getElementById('products-grid');
 const cartItems = document.getElementById('cart-items');
@@ -13,8 +27,7 @@ const closeModal = document.getElementById('close-modal');
 const searchInput = document.getElementById('search');
 const searchBtn = document.getElementById('search-btn');
 
-// State
-// Cart lines are { id, name, price, image, qty }
+// State - cart lines are { id, name, price, image, qty }
 let cart = [];
 let products = [];
 
@@ -26,14 +39,7 @@ const API_BASE = '';
 const CART_STORAGE_KEY = 'fiti-cart';
 let cartApiAvailable = false;
 
-// --- Utilities -----------------------------------------------------------
-
-// Escape user/data-provided text before inserting into HTML
-function escapeHtml(value) {
-    const div = document.createElement('div');
-    div.textContent = String(value);
-    return div.innerHTML;
-}
+// --- Persistence ----------------------------------------------------------
 
 function saveCartLocally() {
     try {
@@ -45,7 +51,7 @@ function saveCartLocally() {
 
 function loadCartLocally() {
     try {
-        return JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+        return normalizeCart(JSON.parse(localStorage.getItem(CART_STORAGE_KEY)));
     } catch {
         return [];
     }
@@ -80,7 +86,7 @@ async function persistCartLine(line, { isNew = false, removed = false } = {}) {
     }
 }
 
-// --- Products ------------------------------------------------------------
+// --- Products ---------------------------------------------------------------
 
 // Fetch products from local db.json
 async function fetchProducts() {
@@ -100,8 +106,7 @@ function filterProducts(category) {
     if (category === 'all') {
         displayProducts(products);
     } else {
-        const filteredProducts = products.filter(product => product.category === category);
-        displayProducts(filteredProducts);
+        displayProducts(products.filter(product => product.category === category));
     }
 }
 
@@ -123,67 +128,45 @@ function displayProducts(productsToShow) {
         productsGrid.appendChild(productCard);
     });
 
-    // Add event listeners to add to cart buttons
     document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', addToCart);
+        button.addEventListener('click', handleAddToCart);
     });
 }
 
-// --- Cart ----------------------------------------------------------------
+// --- Cart actions -----------------------------------------------------------
 
-// Add product to cart (or bump quantity if it's already there)
-async function addToCart(event) {
+async function handleAddToCart(event) {
     const productId = parseInt(event.target.dataset.id);
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
-    const existing = cart.find(line => line.id === productId);
-    if (existing) {
-        existing.qty += 1;
-        await persistCartLine(existing);
-    } else {
-        const line = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            qty: 1,
-        };
-        cart.push(line);
-        await persistCartLine(line, { isNew: true });
-    }
-
-    updateCartDisplay();
-    updateCartCount();
+    const isNew = !cart.some(line => line.id === productId);
+    cart = addItem(cart, product);
+    await persistCartLine(cart.find(line => line.id === productId), { isNew });
+    renderCart();
 }
 
-// Decrement quantity, removing the line when it reaches zero
-async function decrementCartLine(productId) {
-    const line = cart.find(item => item.id === productId);
-    if (!line) return;
-
-    line.qty -= 1;
-    if (line.qty <= 0) {
-        cart = cart.filter(item => item.id !== productId);
-        await persistCartLine(line, { removed: true });
-    } else {
-        await persistCartLine(line);
-    }
-
-    updateCartDisplay();
-    updateCartCount();
+async function handleIncrement(productId) {
+    cart = incrementItem(cart, productId);
+    await persistCartLine(cart.find(line => line.id === productId));
+    renderCart();
 }
 
-// Remove a line entirely
-async function removeFromCart(productId) {
+async function handleDecrement(productId) {
+    const before = cart.find(line => line.id === productId);
+    if (!before) return;
+    cart = decrementItem(cart, productId);
+    const after = cart.find(line => line.id === productId);
+    await persistCartLine(after || before, { removed: !after });
+    renderCart();
+}
+
+async function handleRemove(productId) {
     const line = cart.find(item => item.id === productId);
     if (!line) return;
-
-    cart = cart.filter(item => item.id !== productId);
+    cart = removeItem(cart, productId);
     await persistCartLine(line, { removed: true });
-
-    updateCartDisplay();
-    updateCartCount();
+    renderCart();
 }
 
 // Clear entire cart
@@ -202,15 +185,13 @@ async function clearCart() {
         }
     }
     saveCartLocally();
-
-    updateCartDisplay();
-    updateCartCount();
+    renderCart();
 }
 
-// Update cart display
-function updateCartDisplay() {
+// --- Rendering --------------------------------------------------------------
+
+function renderCart() {
     cartItems.innerHTML = '';
-    let total = 0;
 
     cart.forEach(item => {
         const lineTotal = item.price * item.qty;
@@ -227,35 +208,21 @@ function updateCartDisplay() {
             <button class="remove-item" data-id="${Number(item.id)}" aria-label="Remove ${escapeHtml(item.name)} from cart">Remove</button>
         `;
         cartItems.appendChild(cartItem);
-        total += lineTotal;
     });
 
-    totalItems.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-    totalCost.textContent = total.toFixed(2);
+    totalItems.textContent = itemCount(cart);
+    totalCost.textContent = cartTotal(cart).toFixed(2);
+    cartCount.textContent = itemCount(cart);
 
-    // Wire up quantity and remove controls
     document.querySelectorAll('.remove-item').forEach(button => {
-        button.addEventListener('click', e => removeFromCart(parseInt(e.target.dataset.id)));
+        button.addEventListener('click', e => handleRemove(parseInt(e.target.dataset.id)));
     });
     document.querySelectorAll('.qty-decrease').forEach(button => {
-        button.addEventListener('click', e => decrementCartLine(parseInt(e.target.dataset.id)));
+        button.addEventListener('click', e => handleDecrement(parseInt(e.target.dataset.id)));
     });
     document.querySelectorAll('.qty-increase').forEach(button => {
-        button.addEventListener('click', e => {
-            const line = cart.find(item => item.id === parseInt(e.target.dataset.id));
-            if (line) {
-                line.qty += 1;
-                persistCartLine(line);
-                updateCartDisplay();
-                updateCartCount();
-            }
-        });
+        button.addEventListener('click', e => handleIncrement(parseInt(e.target.dataset.id)));
     });
-}
-
-// Update cart count in header
-function updateCartCount() {
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
 }
 
 // Save cart to orders
@@ -263,7 +230,6 @@ async function saveCart() {
     if (cart.length === 0) return;
     const order = { items: cart, timestamp: new Date().toISOString() };
     if (!cartApiAvailable) {
-        // Static hosting: keep a local order history
         try {
             const orders = JSON.parse(localStorage.getItem('fiti-orders')) || [];
             orders.push(order);
@@ -287,19 +253,16 @@ async function saveCart() {
     }
 }
 
-// --- UI ------------------------------------------------------------------
+// --- UI ----------------------------------------------------------------------
 
-// Toggle cart sidebar
 function toggleCart() {
     cartSidebar.classList.toggle('hidden');
 }
 
-// Close cart sidebar
 function closeCart() {
     cartSidebar.classList.add('hidden');
 }
 
-// Show checkout modal
 async function showCheckoutModal() {
     if (cart.length === 0) {
         alert('Your cart is empty. Add some products before checking out.');
@@ -310,19 +273,18 @@ async function showCheckoutModal() {
     checkoutModal.classList.remove('hidden');
 }
 
-// Close checkout modal
 function closeCheckoutModal() {
     checkoutModal.classList.add('hidden');
 }
 
-// Search functionality
 function searchProducts() {
     const query = searchInput.value.toLowerCase();
-    const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(query) ||
-        product.description.toLowerCase().includes(query)
+    displayProducts(
+        products.filter(product =>
+            product.name.toLowerCase().includes(query) ||
+            product.description.toLowerCase().includes(query)
+        )
     );
-    displayProducts(filteredProducts);
 }
 
 // Event listeners
@@ -341,11 +303,8 @@ searchInput.addEventListener('keypress', (e) => {
 function addCategoryListeners() {
     document.querySelectorAll('.category-btn').forEach(button => {
         button.addEventListener('click', (e) => {
-            // Remove active class from all buttons
             document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
             e.target.classList.add('active');
-            // Filter products
             filterProducts(e.target.dataset.category);
         });
     });
@@ -358,21 +317,17 @@ async function fetchCart() {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
         cartApiAvailable = true;
-        // Migrate legacy entries without a qty field
-        cart = data.map(item => ({ ...item, qty: item.qty || 1 }));
+        cart = normalizeCart(data);
     } catch {
-        // Static hosting (e.g. Netlify): fall back to localStorage
         cartApiAvailable = false;
         cart = loadCartLocally();
     }
-    updateCartDisplay();
-    updateCartCount();
+    renderCart();
 }
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
     fetchCart();
-    // Add category listeners after DOM is loaded
     addCategoryListeners();
 });
