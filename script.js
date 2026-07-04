@@ -331,3 +331,46 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchCart();
     addCategoryListeners();
 });
+
+// --- PWA + theme -----------------------------------------------------------
+
+// Register the service worker (PWA: installable + offline app shell)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(error => {
+            console.error('Service worker registration failed:', error);
+        });
+    });
+}
+
+// Dark mode: manual toggle persisted in localStorage, OS preference as default
+const themeToggle = document.getElementById('theme-toggle');
+
+function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    if (themeToggle) {
+        themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+    try {
+        localStorage.setItem('fiti-theme', theme);
+    } catch {
+        /* storage unavailable - theme just won't persist */
+    }
+}
+
+const storedTheme = (() => {
+    try {
+        return localStorage.getItem('fiti-theme');
+    } catch {
+        return null;
+    }
+})();
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+applyTheme(storedTheme || (prefersDark ? 'dark' : 'light'));
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+    });
+}

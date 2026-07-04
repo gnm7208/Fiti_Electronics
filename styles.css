@@ -372,3 +372,64 @@ body {
 .qty-btn:hover {
     background: #e0e0e0;
 }
+
+/* ---------------------------------------------------------------------- */
+/* Dark mode (data-theme attribute set by the toggle; falls back to OS    */
+/* preference via JS on first visit)                                      */
+/* ---------------------------------------------------------------------- */
+
+html[data-theme="dark"] body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+html[data-theme="dark"] .product-card,
+html[data-theme="dark"] .cart-sidebar,
+html[data-theme="dark"] .modal-content {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+
+html[data-theme="dark"] .category-btn {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+html[data-theme="dark"] .category-btn.active {
+    background: #d32f2f;
+    color: #fff;
+}
+
+html[data-theme="dark"] .qty-btn {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+html[data-theme="dark"] .product-description,
+html[data-theme="dark"] .cart-item-name {
+    color: #b5b5b5;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+/* Screen-reader-only helper */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

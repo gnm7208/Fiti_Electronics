@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fiti Electronics — a mini e-commerce store for computers, laptops, phones, TVs, and accessories.">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta property="og:title" content="Fiti Electronics — Your Online Electronics Store">
+    <meta property="og:description" content="Browse and shop electronics: computers, laptops, phones, TVs, and accessories.">
+    <meta property="og:type" content="website">
     <title>Fiti Electronics - Your Online Electronics Store</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <header class="header">
@@ -12,39 +18,41 @@
             <div class="logo">
                 <h1>👍 Fiti Electronics</h1>
             </div>
-            <div class="search-container">
-                <input type="text" id="search" placeholder="Search products..." class="search-input">
-                <button id="search-btn" class="search-btn">🔍</button>
-            </div>
+            <search class="search-container">
+                <label for="search" class="visually-hidden">Search products</label>
+                <input type="search" id="search" placeholder="Search products..." class="search-input">
+                <button id="search-btn" class="search-btn" aria-label="Search">🔍</button>
+            </search>
             <div class="cart-icon">
-                <span id="cart-count">0</span>
-                <button id="cart-toggle" class="cart-toggle">🛒 Cart</button>
+                <span id="cart-count" aria-live="polite">0</span>
+                <button id="cart-toggle" class="cart-toggle" aria-controls="cart-sidebar" aria-expanded="false">🛒 Cart</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
             </div>
         </div>
     </header>
 
     <main class="main">
-        <section class="products-section">
+        <section class="products-section" aria-label="Product catalogue">
             <h2>Our Products</h2>
-            <div class="category-menu">
+            <nav class="category-menu" aria-label="Product categories">
                 <button class="category-btn active" data-category="all">All</button>
                 <button class="category-btn" data-category="computers">Computers</button>
                 <button class="category-btn" data-category="laptops">Laptops</button>
                 <button class="category-btn" data-category="phones">Phones</button>
                 <button class="category-btn" data-category="tvs">TVs</button>
                 <button class="category-btn" data-category="accessories">Accessories</button>
-            </div>
+            </nav>
             <div id="products-grid" class="products-grid">
                 <!-- Products will be loaded here dynamically -->
             </div>
         </section>
 
-        <aside id="cart-sidebar" class="cart-sidebar hidden">
+        <aside id="cart-sidebar" class="cart-sidebar hidden" aria-label="Shopping cart">
             <div class="cart-header">
                 <h2>Your Cart</h2>
-                <button id="cart-close" class="cart-close">✕</button>
+                <button id="cart-close" class="cart-close" aria-label="Close cart">✕</button>
             </div>
-            <div id="cart-items" class="cart-items">
+            <div id="cart-items" class="cart-items" aria-live="polite">
                 <!-- Cart items will be loaded here -->
             </div>
             <div class="cart-summary">
@@ -55,9 +63,9 @@
         </aside>
     </main>
 
-    <div id="checkout-modal" class="modal hidden">
+    <div id="checkout-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
         <div class="modal-content">
-            <h2>Checkout</h2>
+            <h2 id="checkout-title">Checkout</h2>
             <p>Thank you for shopping with Fiti Electronics!</p>
             <p>Your order has been placed successfully.</p>
             <button id="close-modal" class="close-modal">Close</button>
