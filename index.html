@@ -16,7 +16,11 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <h1>👍 Fiti Electronics</h1>
+                <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <rect x="1" y="1" width="22" height="22" rx="7" fill="#ffffff" fill-opacity="0.16"/>
+                    <path d="M13 2.5L5 13.5H10.5L10 21.5L19 10H13.2L13 2.5Z" fill="#ffffff"/>
+                </svg>
+                <h1>Fiti Electronics</h1>
             </div>
             <search class="search-container">
                 <label for="search" class="visually-hidden">Search products</label>
@@ -24,6 +28,7 @@
                 <button id="search-btn" class="search-btn" aria-label="Search">🔍</button>
             </search>
             <div class="cart-icon">
+                <a href="#contact-section" class="header-nav-link">📍 Contact</a>
                 <span id="cart-count" aria-live="polite">0</span>
                 <button id="cart-toggle" class="cart-toggle" aria-controls="cart-sidebar" aria-expanded="false">🛒 Cart</button>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
@@ -31,8 +36,26 @@
         </div>
     </header>
 
+    <section class="hero">
+        <div class="container hero-content">
+            <h2 class="hero-title">Power Your Life with the Latest Tech</h2>
+            <p class="hero-subtitle">
+                Computers, laptops, phones, TVs &amp; accessories — pay your way with M-Pesa or card.
+            </p>
+        </div>
+    </section>
+
     <main class="main">
         <section class="products-section" aria-label="Product catalogue">
+            <section id="deals-section" class="deals-section" aria-label="Special offers">
+                <h2 class="deals-title">🔥 Deals of the Day</h2>
+                <div class="deals-carousel-wrap">
+                    <div id="deals-track" class="deals-track" tabindex="0" aria-label="Discounted products, scrollable">
+                        <!-- Deal cards rendered here -->
+                    </div>
+                </div>
+            </section>
+
             <h2>Our Products</h2>
             <nav class="category-menu" aria-label="Product categories">
                 <button class="category-btn active" data-category="all">All</button>
@@ -64,13 +87,169 @@
     </main>
 
     <div id="checkout-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
-        <div class="modal-content">
+        <div class="modal-content checkout-modal-content">
+            <button id="close-modal" class="close-modal" aria-label="Close checkout">✕</button>
             <h2 id="checkout-title">Checkout</h2>
-            <p>Thank you for shopping with Fiti Electronics!</p>
-            <p>Your order has been placed successfully.</p>
-            <button id="close-modal" class="close-modal">Close</button>
+
+            <p id="checkout-demo-banner" class="demo-banner hidden">
+                🧪 Demo mode — no live payment backend detected here, so payment is simulated.
+            </p>
+
+            <section id="checkout-step-method" class="checkout-step">
+                <p class="checkout-total">Total due: $<span id="checkout-total-amount">0.00</span></p>
+                <div class="payment-methods" role="group" aria-label="Choose a payment method">
+                    <button type="button" class="payment-method-btn" data-method="mpesa">
+                        <span class="payment-method-icon" aria-hidden="true">📱</span> Pay with M-Pesa
+                    </button>
+                    <button type="button" class="payment-method-btn" data-method="card">
+                        <span class="payment-method-icon" aria-hidden="true">💳</span> Pay with Card
+                    </button>
+                </div>
+            </section>
+
+            <form id="checkout-mpesa-form" class="checkout-step hidden">
+                <label for="mpesa-phone">M-Pesa phone number</label>
+                <input type="tel" id="mpesa-phone" name="mpesa-phone" placeholder="07XX XXX XXX" inputmode="tel" autocomplete="tel" required>
+                <p class="field-error hidden" id="mpesa-phone-error" role="alert"></p>
+                <button type="submit" class="pay-btn" id="mpesa-pay-btn">Send M-Pesa Prompt</button>
+                <button type="button" class="back-btn" data-back>← Choose another method</button>
+            </form>
+
+            <div id="checkout-card-form" class="checkout-step hidden">
+                <label for="card-element">Card details</label>
+                <div id="card-element"></div>
+                <p class="field-error hidden" id="card-error" role="alert"></p>
+                <button type="button" class="pay-btn" id="card-pay-btn">Pay $<span id="card-pay-amount">0.00</span></button>
+                <button type="button" class="back-btn" data-back>← Choose another method</button>
+            </div>
+
+            <div id="checkout-status" class="checkout-step hidden" aria-live="polite">
+                <div class="spinner" aria-hidden="true"></div>
+                <p id="checkout-status-text">Waiting for confirmation…</p>
+            </div>
+
+            <div id="checkout-receipt" class="checkout-step hidden">
+                <p id="checkout-receipt-icon" class="receipt-icon" aria-hidden="true">✅</p>
+                <p id="checkout-receipt-text" class="receipt-text">Payment successful!</p>
+                <dl class="receipt-details">
+                    <dt>Method</dt>
+                    <dd id="receipt-method">—</dd>
+                    <dt>Amount</dt>
+                    <dd id="receipt-amount">—</dd>
+                    <dt>Reference</dt>
+                    <dd id="receipt-reference">—</dd>
+                </dl>
+                <button id="receipt-done-btn" class="pay-btn" type="button">Done</button>
+            </div>
         </div>
     </div>
+
+    <div id="product-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+        <div class="modal-content product-modal-content">
+            <button id="product-modal-close" class="close-modal" aria-label="Close product details">✕</button>
+            <div class="product-modal-body">
+                <div class="product-gallery">
+                    <img id="product-modal-main-image" class="product-modal-main-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7" alt="">
+                    <div id="product-modal-thumbs" class="product-modal-thumbs"></div>
+                </div>
+                <div class="product-modal-info">
+                    <h2 id="product-modal-title" class="product-modal-title"></h2>
+                    <p class="product-modal-price">
+                        <span id="product-modal-original-price" class="original-price hidden"></span>
+                        <span id="product-modal-price" class="current-price"></span>
+                        <span id="product-modal-discount-badge" class="discount-badge hidden"></span>
+                    </p>
+                    <p id="product-modal-description" class="product-modal-description"></p>
+                    <dl id="product-modal-specs" class="product-modal-specs"></dl>
+                    <button id="product-modal-add-to-cart" class="add-to-cart product-modal-add-btn" type="button">Add to Cart</button>
+                    <button id="product-modal-ask-toggle" class="ask-toggle-btn" type="button" aria-expanded="false" aria-controls="product-modal-query">❓ Ask about this product</button>
+                    <div id="product-modal-query" class="product-modal-query hidden">
+                        <p class="product-modal-query-context">Regarding: <strong id="product-modal-query-product-name"></strong></p>
+                        <form id="product-query-form" class="query-form">
+                            <label for="product-query-name">Your name</label>
+                            <input type="text" id="product-query-name" name="product-query-name" placeholder="Jane Doe" required>
+                            <p class="field-error hidden" id="product-query-name-error" role="alert"></p>
+
+                            <label for="product-query-message">Your question</label>
+                            <textarea id="product-query-message" name="product-query-message" rows="3" placeholder="Ask about this product..." required></textarea>
+                            <p class="field-error hidden" id="product-query-message-error" role="alert"></p>
+
+                            <button type="submit" class="pay-btn query-submit-btn">Send Question</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contact-section" class="site-footer" aria-label="Contact and visit us">
+        <div class="container contact-container">
+            <h2 class="contact-heading">📍 Visit &amp; Contact Us</h2>
+
+            <div class="contact-grid">
+                <div class="contact-map-block">
+                    <div class="map-header">
+                        <h3>Our Shop</h3>
+                        <button id="map-toggle-btn" class="map-toggle-btn" type="button" aria-expanded="true" aria-controls="map-wrap">Hide map</button>
+                    </div>
+                    <div id="map-wrap" class="map-wrap">
+                        <iframe
+                            id="shop-map"
+                            class="shop-map"
+                            title="Fiti Electronics shop location"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="https://www.google.com/maps?q=-1.119813,37.003611&z=15&output=embed">
+                        </iframe>
+                    </div>
+                    <a id="directions-link" class="directions-btn" href="https://www.google.com/maps/dir/?api=1&destination=-1.119813,37.003611" target="_blank" rel="noopener">
+                        🧭 Get Directions
+                    </a>
+                    <p class="shop-address"><strong>Fiti Electronics</strong><br>Juja, Kiambu County, Kenya</p>
+
+                    <div class="delivery-areas">
+                        <h3>We Deliver To</h3>
+                        <ul>
+                            <li>Nairobi — same-day / next-day delivery</li>
+                            <li>Thika, Nakuru, Kisumu, Mombasa, Eldoret — 2–3 day courier delivery</li>
+                            <li>Nationwide delivery available via courier partners</li>
+                        </ul>
+                    </div>
+
+                    <p class="contact-phone">📞 Enquiries: <a href="tel:+254708764575">0708 764 575</a></p>
+                </div>
+
+                <div class="contact-query-block">
+                    <h3>Ask Us Anything</h3>
+                    <p class="contact-query-hint">Have a question about a product or the shop? Send us a message.</p>
+                    <form id="query-form" class="query-form">
+                        <label for="query-name">Your name</label>
+                        <input type="text" id="query-name" name="query-name" placeholder="Jane Doe" required>
+                        <p class="field-error hidden" id="query-name-error" role="alert"></p>
+
+                        <label for="query-message">Your question</label>
+                        <textarea id="query-message" name="query-message" rows="4" placeholder="Ask about a product or the shop..." required></textarea>
+                        <p class="field-error hidden" id="query-message-error" role="alert"></p>
+
+                        <button type="submit" class="pay-btn query-submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="social-links-block">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://t.me/FitiElectronicsKE" target="_blank" rel="noopener" class="social-link social-link-telegram">✈️ Telegram</a>
+                    <a href="https://instagram.com/fitielectronics.ke" target="_blank" rel="noopener" class="social-link social-link-instagram">📷 Instagram</a>
+                    <a href="https://facebook.com/FitiElectronicsKenya" target="_blank" rel="noopener" class="social-link social-link-facebook">📘 Facebook</a>
+                </div>
+                <p class="social-preview-note">Sample posts — connect your real accounts to go live</p>
+                <div id="social-preview-grid" class="social-preview-grid"></div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
     <script type="module" src="script.js"></script>
 </body>

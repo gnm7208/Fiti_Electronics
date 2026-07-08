@@ -20,4 +20,10 @@ export default [
             globals: { ...globals.node },
         },
     },
+    {
+        files: ['server.js', 'server/**/*.js'],
+        languageOptions: {
+            globals: { ...globals.node },
+        },
+    },
 ];
