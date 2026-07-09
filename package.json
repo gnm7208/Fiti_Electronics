@@ -12,9 +12,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "json-server": "^0.17.4",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
     "stripe": "^22.3.0"
   },
   "devDependencies": {

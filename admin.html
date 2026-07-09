@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>Fiti Electronics — Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <section id="admin-login-screen" class="admin-login-screen">
+        <form id="admin-login-form" class="admin-login-form">
+            <div class="logo admin-login-logo">
+                <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <rect x="1" y="1" width="22" height="22" rx="7" fill="#5c6bc0" fill-opacity="0.16"/>
+                    <path d="M13 2.5L5 13.5H10.5L10 21.5L19 10H13.2L13 2.5Z" fill="#5c6bc0"/>
+                </svg>
+                <h1>Fiti Admin</h1>
+            </div>
+            <label for="admin-username">Username</label>
+            <input type="text" id="admin-username" name="username" autocomplete="username" required>
+
+            <label for="admin-password">Password</label>
+            <input type="password" id="admin-password" name="password" autocomplete="current-password" required>
+
+            <p class="field-error hidden" id="admin-login-error" role="alert"></p>
+            <button type="submit" class="pay-btn">Log In</button>
+        </form>
+    </section>
+
+    <div id="admin-dashboard" class="admin-dashboard hidden">
+        <header class="admin-header">
+            <div class="logo">
+                <svg class="logo-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <rect x="1" y="1" width="22" height="22" rx="7" fill="#ffffff" fill-opacity="0.16"/>
+                    <path d="M13 2.5L5 13.5H10.5L10 21.5L19 10H13.2L13 2.5Z" fill="#ffffff"/>
+                </svg>
+                <h1>Fiti Admin</h1>
+            </div>
+            <div class="admin-header-actions">
+                <button id="admin-notifications-toggle" class="admin-icon-btn" aria-label="Notifications" aria-expanded="false" aria-controls="admin-notifications-panel">
+                    🔔<span id="admin-notif-badge" class="admin-notif-badge hidden">0</span>
+                </button>
+                <button id="admin-theme-toggle" class="admin-icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+                <button id="admin-logout-btn" class="admin-icon-btn">Log Out</button>
+            </div>
+        </header>
+
+        <aside id="admin-notifications-panel" class="admin-notifications-panel hidden" aria-label="Notifications">
+            <div class="admin-notifications-header">
+                <h2>Notifications</h2>
+                <button id="admin-notifications-close" class="close-modal" aria-label="Close notifications">✕</button>
+            </div>
+            <div id="admin-notifications-list" class="admin-notifications-list"></div>
+        </aside>
+
+        <main class="admin-main">
+            <section class="admin-stat-tiles" id="admin-stat-tiles" aria-label="Overview stats"></section>
+
+            <section class="admin-charts-row" aria-label="Trends over the last 30 days">
+                <div class="admin-chart-card chart-visits">
+                    <h3>Visits <span class="admin-card-hint-inline">last 30 days</span></h3>
+                    <div id="chart-visits" class="admin-chart"></div>
+                </div>
+                <div class="admin-chart-card chart-orders">
+                    <h3>Orders <span class="admin-card-hint-inline">last 30 days</span></h3>
+                    <div id="chart-orders" class="admin-chart"></div>
+                </div>
+                <div class="admin-chart-card chart-revenue">
+                    <h3>Revenue <span class="admin-card-hint-inline">last 30 days</span></h3>
+                    <div id="chart-revenue" class="admin-chart"></div>
+                </div>
+            </section>
+
+            <section class="admin-chart-card admin-demand-card" aria-label="Product demand comparison">
+                <h3>Product Demand — Units Sold</h3>
+                <p class="admin-card-hint">Best sellers to restock, lowest to consider phasing out.</p>
+                <div id="chart-demand" class="admin-chart admin-demand-chart"></div>
+            </section>
+
+            <section class="admin-products-section" aria-label="Product management">
+                <div class="admin-section-header">
+                    <h2>Products</h2>
+                    <button id="admin-add-product-btn" class="pay-btn" type="button">+ Add Product</button>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-products-table">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Cost</th>
+                                <th>Margin</th>
+                                <th>Stock</th>
+                                <th>Sold</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-products-tbody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="admin-product-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="admin-product-modal-title">
+        <div class="modal-content admin-product-modal-content">
+            <button id="admin-product-modal-close" class="close-modal" aria-label="Close">✕</button>
+            <h2 id="admin-product-modal-title">Add Product</h2>
+            <form id="admin-product-form" class="admin-product-form">
+                <input type="hidden" id="admin-product-id">
+
+                <label for="admin-product-name">Name</label>
+                <input type="text" id="admin-product-name" required>
+
+                <label for="admin-product-category">Category</label>
+                <select id="admin-product-category" required>
+                    <option value="computers">Computers</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="phones">Phones</option>
+                    <option value="tvs">TVs</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+
+                <label for="admin-product-description">Description</label>
+                <textarea id="admin-product-description" rows="3" required></textarea>
+
+                <div class="admin-form-row">
+                    <div>
+                        <label for="admin-product-price">Selling price ($)</label>
+                        <input type="number" id="admin-product-price" min="0" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="admin-product-cost-price">Buying price ($)</label>
+                        <input type="number" id="admin-product-cost-price" min="0" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="admin-form-row">
+                    <div>
+                        <label for="admin-product-stock">Stock (units)</label>
+                        <input type="number" id="admin-product-stock" min="0" step="1" required>
+                    </div>
+                    <div>
+                        <label for="admin-product-original-price">Deal price was ($, optional)</label>
+                        <input type="number" id="admin-product-original-price" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <fieldset class="admin-photo-fieldset">
+                    <legend>Primary photo</legend>
+                    <label for="admin-product-photo-file">Upload a file</label>
+                    <input type="file" id="admin-product-photo-file" accept="image/png,image/jpeg,image/webp">
+                    <label for="admin-product-photo-url">...or paste a URL / existing path</label>
+                    <input type="text" id="admin-product-photo-url" placeholder="images/example.png or https://...">
+                </fieldset>
+
+                <fieldset class="admin-photo-fieldset">
+                    <legend>Additional gallery photos (optional)</legend>
+                    <label for="admin-product-gallery-files">Upload files</label>
+                    <input type="file" id="admin-product-gallery-files" accept="image/png,image/jpeg,image/webp" multiple>
+                    <label for="admin-product-gallery-urls">...or paste URLs (one per line)</label>
+                    <textarea id="admin-product-gallery-urls" rows="2"></textarea>
+                </fieldset>
+
+                <fieldset class="admin-specs-fieldset">
+                    <legend>Specs</legend>
+                    <div id="admin-specs-rows" class="admin-specs-rows"></div>
+                    <button type="button" id="admin-add-spec-row" class="ask-toggle-btn">+ Add spec</button>
+                </fieldset>
+
+                <p class="field-error hidden" id="admin-product-form-error" role="alert"></p>
+                <button type="submit" class="pay-btn" id="admin-product-save-btn">Save Product</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="admin-toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

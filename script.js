@@ -14,6 +14,7 @@ import { escapeHtml } from './js/utils.js';
 import { normalizeKenyanPhone, formatAmount } from './js/payments.js';
 import { getDeals, discountPercent } from './js/deals.js';
 import { isValidName, isValidMessage, buildQueryPayload } from './js/queries.js';
+import { isOutOfStock, isLowStock, availableToAdd } from './js/stock.js';
 
 // DOM elements
 const productsGrid = document.getElementById('products-grid');
@@ -73,6 +74,7 @@ const productModalDiscountBadge = document.getElementById('product-modal-discoun
 const productModalDescription = document.getElementById('product-modal-description');
 const productModalSpecs = document.getElementById('product-modal-specs');
 const productModalAddToCart = document.getElementById('product-modal-add-to-cart');
+const productModalStockStatus = document.getElementById('product-modal-stock-status');
 const productModalAskToggle = document.getElementById('product-modal-ask-toggle');
 const productModalQuery = document.getElementById('product-modal-query');
 const productModalQueryProductName = document.getElementById('product-modal-query-product-name');
@@ -168,11 +170,26 @@ async function persistCartLine(line, { isNew = false, removed = false } = {}) {
 // --- Products ---------------------------------------------------------------
 
 // Fetch products from local db.json
+// Fetches the static db.json file directly (rather than a /products API
+// route) so product browsing still works on static hosting like Netlify,
+// which has no backend at all. The admin dashboard's lowdb writes rewrite
+// this same file on disk non-atomically, so a request can rarely land
+// mid-write and read a truncated file - one retry clears that up without
+// giving up the static-hosting fallback.
+async function fetchProductsOnce() {
+    const response = await fetch('./db.json');
+    const data = await response.json();
+    return data.products;
+}
+
 async function fetchProducts() {
     try {
-        const response = await fetch('./db.json');
-        const data = await response.json();
-        products = data.products;
+        try {
+            products = await fetchProductsOnce();
+        } catch {
+            await new Promise(resolve => setTimeout(resolve, 150));
+            products = await fetchProductsOnce();
+        }
         displayProducts(products);
         renderDeals();
         renderSocialPreview();
@@ -197,18 +214,22 @@ function filterProducts(category) {
 function displayProducts(productsToShow) {
     productsGrid.innerHTML = '';
     productsToShow.forEach(product => {
+        const outOfStock = isOutOfStock(product);
+        const lowStock = isLowStock(product);
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.dataset.id = String(product.id);
         productCard.innerHTML = `
             <div class="product-image-wrap">
+                ${outOfStock ? '<span class="out-of-stock-badge">Out of Stock</span>' : ''}
                 <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" class="product-image" loading="lazy">
             </div>
             <div class="product-info">
                 <h3 class="product-name">${escapeHtml(product.name)}</h3>
                 <p class="product-price">$${Number(product.price).toFixed(2)}</p>
                 <p class="product-description">${escapeHtml(product.description)}</p>
-                <button class="add-to-cart" data-id="${Number(product.id)}">Add to Cart</button>
+                ${lowStock ? `<p class="low-stock-hint">Only ${product.stock} left</p>` : ''}
+                <button class="add-to-cart" data-id="${Number(product.id)}" ${outOfStock ? 'disabled' : ''}>${outOfStock ? 'Out of Stock' : 'Add to Cart'}</button>
             </div>
         `;
         productsGrid.appendChild(productCard);
@@ -249,6 +270,7 @@ function renderDeals() {
         card.innerHTML = `
             <div class="deal-card-image-wrap">
                 <span class="deal-card-badge">-${percentOff}%</span>
+                ${isOutOfStock(product) ? '<span class="out-of-stock-badge deal-out-of-stock-badge">Out of Stock</span>' : ''}
                 <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" class="deal-card-image" loading="lazy">
             </div>
             <div class="deal-card-info">
@@ -319,6 +341,13 @@ function openProductModal(product) {
     renderProductModalImages(product);
     renderProductModalSpecs(product);
 
+    const outOfStock = isOutOfStock(product);
+    const lowStock = isLowStock(product);
+    productModalStockStatus.classList.toggle('hidden', !outOfStock && !lowStock);
+    productModalStockStatus.textContent = outOfStock ? 'Out of Stock' : lowStock ? `Only ${product.stock} left` : '';
+    productModalAddToCart.disabled = outOfStock;
+    productModalAddToCart.textContent = outOfStock ? 'Out of Stock' : 'Add to Cart';
+
     productModal.classList.remove('hidden');
     productModalClose.focus();
 }
@@ -339,8 +368,13 @@ if (productModal) {
 }
 if (productModalAddToCart) {
     productModalAddToCart.addEventListener('click', async () => {
-        if (!modalProduct) return;
-        const isNew = !cart.some(line => line.id === modalProduct.id);
+        if (!modalProduct || isOutOfStock(modalProduct)) return;
+        const existingLine = cart.find(line => line.id === modalProduct.id);
+        if (existingLine && existingLine.qty >= availableToAdd(modalProduct)) {
+            showToast(`Only ${modalProduct.stock} of ${modalProduct.name} in stock`, 'error');
+            return;
+        }
+        const isNew = !existingLine;
         cart = addItem(cart, modalProduct);
         await persistCartLine(cart.find(line => line.id === modalProduct.id), { isNew });
         renderCart();
@@ -359,15 +393,26 @@ document.addEventListener('keydown', event => {
 async function handleAddToCart(event) {
     const productId = parseInt(event.target.dataset.id);
     const product = products.find(p => p.id === productId);
-    if (!product) return;
+    if (!product || isOutOfStock(product)) return;
 
-    const isNew = !cart.some(line => line.id === productId);
+    const existingLine = cart.find(line => line.id === productId);
+    if (existingLine && existingLine.qty >= availableToAdd(product)) {
+        showToast(`Only ${product.stock} of ${product.name} in stock`, 'error');
+        return;
+    }
+    const isNew = !existingLine;
     cart = addItem(cart, product);
     await persistCartLine(cart.find(line => line.id === productId), { isNew });
     renderCart();
 }
 
 async function handleIncrement(productId) {
+    const product = products.find(p => p.id === productId);
+    const existingLine = cart.find(line => line.id === productId);
+    if (product && existingLine && existingLine.qty >= availableToAdd(product)) {
+        showToast(`Only ${product.stock} of ${product.name} in stock`, 'error');
+        return;
+    }
     cart = incrementItem(cart, productId);
     await persistCartLine(cart.find(line => line.id === productId));
     renderCart();
@@ -970,11 +1015,39 @@ async function fetchCart() {
     renderCart();
 }
 
+// --- Analytics ---------------------------------------------------------------
+
+const VISITOR_ID_KEY = 'fiti-visitor-id';
+
+function getVisitorId() {
+    try {
+        let id = localStorage.getItem(VISITOR_ID_KEY);
+        if (!id) {
+            id = crypto.randomUUID();
+            localStorage.setItem(VISITOR_ID_KEY, id);
+        }
+        return id;
+    } catch {
+        return crypto.randomUUID();
+    }
+}
+
+// Fire-and-forget: silently does nothing on static hosting with no backend
+// (same tolerant-of-missing-API philosophy as the rest of this app).
+function trackPageview() {
+    fetch(`${API_BASE}/api/analytics/pageview`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ visitorId: getVisitorId() }),
+    }).catch(() => {});
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
     fetchCart();
     addCategoryListeners();
+    trackPageview();
 });
 
 // --- PWA + theme -----------------------------------------------------------

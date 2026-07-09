@@ -22,6 +22,12 @@ A mini e-commerce web application for browsing and purchasing electronics.
 - Contact & Visit Us section: shop location map + directions, delivery-area coverage,
   phone/social links, and a customer query form (general, or product-specific from the
   product popup) - see [API Endpoints](#api-endpoints)
+- Stock-aware storefront: out-of-stock/low-stock badges, disabled Add to Cart, and a
+  per-product cart cap once a product's stock runs out
+- **Admin Dashboard** (`admin.html`): login-protected stats (visits, revenue, profit,
+  units sold, stock levels), a product-demand comparison (best sellers vs. what to phase
+  out), live order/query/stock notifications, and full product CRUD (photos, specs,
+  pricing, stock) - see [Admin Dashboard](#admin-dashboard)
 
 ## Technologies Used
 
@@ -79,8 +85,13 @@ The application uses JSON Server to provide RESTful API endpoints (relative URLs
 - `GET /cart` - Retrieve current cart items
 - `POST /cart` - Add an item to the cart
 - `DELETE /cart/:id` - Remove a specific item from the cart
-- `GET /orders` - Retrieve order history
-- `POST /orders` - Create a new order (checkout)
+- `POST /orders` - Create a new order (checkout) - handled by a custom handler (not
+  json-server's generic route) that validates stock, decrements it, and fires
+  notifications; see [Admin Dashboard](#admin-dashboard)
+
+`GET /orders` and all writes to `/products` (`POST`/`PUT`/`PATCH`/`DELETE`) are **not**
+publicly reachable - order history and catalogue management are admin-only now (see
+below). `GET /products` stays public for browsing.
 
 Payment endpoints (see [Payments Setup](#payments-setup)):
 
@@ -105,6 +116,23 @@ Like `payments`, the `queries` collection is not exposed through json-server's g
 routes (it holds customer names/messages) - only reachable through the route above. On
 static hosting with no backend, submissions are queued in `localStorage` instead.
 
+Analytics (public, fired once per page load by the storefront):
+
+- `POST /api/analytics/pageview` - Records an anonymous visit (a `fiti-visitor-id`
+  generated client-side into `localStorage` distinguishes unique visitors from total views)
+
+Admin dashboard (all behind login - see [Admin Dashboard](#admin-dashboard)):
+
+- `POST /api/admin/auth/login`, `POST /api/admin/auth/logout`, `GET /api/admin/auth/me`
+- `POST /api/admin/products`, `PUT /api/admin/products/:id`, `DELETE /api/admin/products/:id`
+  (`multipart/form-data` - a photo file upload and/or a pasted image URL both work)
+- `GET /api/admin/stats/overview`, `GET /api/admin/stats/timeseries?days=30`,
+  `GET /api/admin/stats/products` (per-product units sold/revenue/profit, for the
+  best-sellers/phase-out comparison)
+- `GET /api/admin/notifications`, `POST /api/admin/notifications/:id/read`,
+  `GET /api/admin/notifications/stream` (Server-Sent Events - live push while the
+  dashboard tab is open)
+
 ## Payments Setup
 
 Real M-Pesa and card payments require credentials that only work on a server with a
@@ -122,6 +150,36 @@ still works end-to-end using a clearly-labeled simulated "demo mode".
 2. On Render, add the same variables under the service's Environment settings.
 3. Test M-Pesa with Safaricom's sandbox test number `254708374149`; test cards with
    Stripe's `4242 4242 4242 4242` (any future expiry, any CVC).
+
+## Admin Dashboard
+
+`admin.html` is a separate, login-protected page (not linked from the storefront) for
+managing the shop: stat tiles (visits, unique visitors, orders, units sold, revenue,
+profit, in/out-of-stock counts), a 30-day trend for visits/orders/revenue, a product
+demand comparison (best sellers to restock vs. lowest demand to consider phasing out),
+live notifications (new order / new query / stock running low or hitting zero), and full
+product management (add/edit/delete, including photos and specs).
+
+1. Set `ADMIN_USERNAME`, `ADMIN_PASSWORD`, and `ADMIN_JWT_SECRET` in `.env` (see
+   `.env.example`) - a single hardcoded operator account, no separate user database.
+2. On Render, add the same three variables under the service's Environment settings.
+3. Open `/admin.html` on your backend deployment (Render, or `localhost:3000` in dev) and
+   log in. **This only works where the Express backend runs** - Netlify's static hosting
+   has no backend, so there's nothing for the dashboard to manage there.
+
+**Product photos**: the add/edit form accepts *either* an uploaded file *or* a pasted
+image URL (an existing `images/...` path works too) for both the primary photo and
+gallery. Uploaded files are saved into `images/` - on Render's free tier this disk is
+**not guaranteed to persist across redeploys/restarts**, so pasting a URL is the more
+durable option there; local dev and paid persistent-disk plans don't have this issue.
+
+**Seed data**: `costPrice`/`stock` didn't exist on any product before this feature, and
+there was no sales history to chart. `scripts/seedAdminData.js` (run once, manually,
+with the server stopped) fabricates realistic placeholder cost prices, stock levels, and
+~2 months of historical orders/pageviews so every stat/chart shows something meaningful
+immediately. It's clearly synthetic - `costPrice`/`stock` are editable per-product from
+the dashboard, and real orders/visits accumulate on top of it without re-running the
+script.
 
 ## Deployment
 
@@ -161,29 +219,46 @@ way.
 
 ```
 fiti-electronics/
-├── index.html          # Main HTML file
+├── index.html          # Main HTML file (storefront)
+├── admin.html          # Admin dashboard page (login-protected)
 ├── styles.css          # CSS styles (design tokens, dark mode, checkout UI)
-├── script.js           # DOM wiring, cart persistence, checkout/payment orchestration
+├── admin.css           # Admin dashboard styles (reuses styles.css's design tokens)
+├── script.js           # Storefront DOM wiring, cart, checkout/payment orchestration
+├── admin.js            # Admin dashboard: auth flow, charts, product CRUD, notifications
 ├── js/
 │   ├── cart.js         # Pure cart logic (unit-testable)
 │   ├── payments.js     # Pure payment logic: phone validation, formatting (unit-testable)
 │   ├── deals.js        # Pure discount/deals logic (unit-testable)
 │   ├── queries.js      # Pure query-form validation/payload logic (unit-testable)
+│   ├── stock.js        # Pure stock-status logic: out-of-stock/low-stock (unit-testable)
 │   └── utils.js        # Shared helpers (HTML escaping)
-├── server.js            # Express + json-server entry point (products/cart/orders + payments/queries)
+├── server.js            # Express + json-server entry point (mounts every router below)
 ├── server/
-│   ├── config.js         # Env var loading for Daraja/Stripe
-│   ├── mpesa.js           # Safaricom Daraja OAuth + STK Push + status query
-│   ├── stripeService.js   # Stripe PaymentIntents + webhook verification
-│   ├── paymentsRouter.js  # /api/payments/* route handlers
-│   ├── paymentsStore.js   # Payment record persistence (json-server's db)
-│   ├── queriesRouter.js   # /api/queries route handler
-│   └── queriesStore.js    # Query record persistence (json-server's db)
+│   ├── config.js              # Env var loading for Daraja/Stripe/Admin
+│   ├── mpesa.js                # Safaricom Daraja OAuth + STK Push + status query
+│   ├── stripeService.js        # Stripe PaymentIntents + webhook verification
+│   ├── paymentsRouter.js       # /api/payments/* route handlers
+│   ├── paymentsStore.js        # Payment record persistence (json-server's db)
+│   ├── queriesRouter.js        # /api/queries route handler
+│   ├── queriesStore.js         # Query record persistence (json-server's db)
+│   ├── adminAuth.js            # Admin login/logout/session + requireAdminAuth middleware
+│   ├── productsStore.js        # Product CRUD + stock decrement (json-server's db)
+│   ├── adminProductsRouter.js  # /api/admin/products/* CRUD routes
+│   ├── uploadMiddleware.js     # multer config for admin-uploaded product photos
+│   ├── orderHandler.js         # POST /orders: stock validation/decrement + notifications
+│   ├── notificationsStore.js   # Notification persistence (json-server's db)
+│   ├── notificationsHub.js     # In-process pub/sub powering the live SSE stream
+│   ├── notificationsRouter.js  # /api/admin/notifications/* routes (incl. SSE stream)
+│   ├── analyticsRouter.js      # POST /api/analytics/pageview (public)
+│   ├── statsAggregator.js      # Pure stats/profit/demand computations (unit-testable)
+│   └── adminStatsRouter.js     # /api/admin/stats/* routes
+├── scripts/
+│   └── seedAdminData.js  # One-time seed: costPrice/stock + synthetic sales/pageviews history
 ├── tests/               # Vitest unit tests
-├── db.json              # JSON data (products, cart, orders, payments, queries)
+├── db.json              # JSON data (products, cart, orders, payments, queries, notifications, pageviews)
 ├── .env.example         # Required environment variables (copy to .env)
 ├── package.json        # Node.js dependencies and scripts
-├── images/             # Product images
+├── images/             # Product images (also the admin photo-upload destination)
 ├── README.md           # This file
 └── LICENSE             # MIT License
 ```

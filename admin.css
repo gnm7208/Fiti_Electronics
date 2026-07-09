@@ -1,0 +1,582 @@
+/* Admin dashboard - reuses styles.css's design tokens (colors, radii,
+   shadows, font) so this reads as the same product, not a bolted-on
+   generic admin template. */
+
+body {
+    background: var(--color-bg);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Login screen                                                            */
+/* ---------------------------------------------------------------------- */
+.admin-login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.admin-login-screen.hidden {
+    display: none;
+}
+
+.admin-login-form {
+    width: 380px;
+    max-width: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.admin-login-logo {
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.admin-login-logo h1 {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.admin-login-form label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+}
+
+.admin-login-form input {
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.admin-login-form button {
+    margin-top: 1rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Shell: header + notifications panel                                    */
+/* ---------------------------------------------------------------------- */
+.admin-dashboard.hidden {
+    display: none;
+}
+
+.admin-header {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: #fff;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+}
+
+.admin-header .logo h1 {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.admin-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.admin-icon-btn {
+    position: relative;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color var(--transition-fast);
+}
+
+.admin-icon-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.admin-notif-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--color-danger);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.25rem;
+}
+
+.admin-notif-badge.hidden {
+    display: none;
+}
+
+.admin-notifications-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 360px;
+    max-width: 100%;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-base);
+}
+
+.admin-notifications-panel.hidden {
+    display: none;
+}
+
+.admin-notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.admin-notifications-list {
+    overflow-y: auto;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.admin-notification-item {
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.8rem;
+    font-size: 0.88rem;
+}
+
+.admin-notification-item.type-order {
+    border-left-color: var(--color-accent);
+}
+
+.admin-notification-item.type-out_of_stock,
+.admin-notification-item.type-low_stock {
+    border-left-color: var(--color-danger);
+}
+
+.admin-notification-item.unread {
+    font-weight: 600;
+}
+
+.admin-notification-time {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    font-size: 0.78rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Main layout                                                            */
+/* ---------------------------------------------------------------------- */
+.admin-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.admin-stat-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+.admin-stat-tile {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 1.1rem 1.2rem;
+}
+
+.admin-stat-tile-label {
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.admin-stat-tile-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-top: 0.3rem;
+    color: var(--color-text);
+}
+
+.admin-stat-tile-value.accent {
+    color: var(--color-accent);
+}
+
+.admin-stat-tile-value.danger {
+    color: var(--color-danger);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Charts                                                                  */
+/* ---------------------------------------------------------------------- */
+.admin-charts-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.admin-chart-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 1.1rem 1.2rem;
+}
+
+.admin-chart-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+}
+
+.admin-card-hint-inline {
+    font-weight: 400;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+}
+
+.admin-card-hint {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin: -0.4rem 0 0.75rem;
+}
+
+.admin-chart {
+    position: relative;
+    width: 100%;
+}
+
+.admin-chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.admin-chart-gridline {
+    stroke: var(--color-border);
+    stroke-width: 1;
+}
+
+.admin-chart-line {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.admin-chart-card.chart-orders .admin-chart-line {
+    stroke: var(--color-card);
+}
+
+.admin-chart-card.chart-revenue .admin-chart-line {
+    stroke: var(--color-accent);
+}
+
+.admin-chart-area {
+    opacity: 0.1;
+}
+
+.admin-chart-dot {
+    fill: var(--color-surface);
+    stroke-width: 2;
+}
+
+.admin-chart-crosshair {
+    stroke: var(--color-text-muted);
+    stroke-width: 1;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.admin-chart-label {
+    fill: var(--color-text-muted);
+    font-size: 10px;
+    font-family: var(--font-sans);
+}
+
+.admin-chart-value-label {
+    fill: var(--color-text);
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--font-sans);
+}
+
+.admin-chart-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--color-text);
+    color: var(--color-bg);
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    white-space: nowrap;
+    transform: translate(-50%, -120%);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    z-index: 5;
+}
+
+.admin-chart-tooltip.visible {
+    opacity: 1;
+}
+
+.admin-demand-chart {
+    height: auto;
+}
+
+.admin-demand-bar-row {
+    cursor: pointer;
+}
+
+.admin-demand-bar {
+    fill: var(--color-primary);
+}
+
+.admin-demand-bar.zero-sales {
+    fill: var(--color-border);
+}
+
+.admin-demand-bar-row:hover .admin-demand-bar {
+    fill: var(--color-primary-hover);
+}
+
+.admin-demand-name {
+    fill: var(--color-text);
+    font-size: 12px;
+    font-family: var(--font-sans);
+}
+
+.admin-demand-value {
+    fill: var(--color-text-muted);
+    font-size: 11px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Products table                                                          */
+/* ---------------------------------------------------------------------- */
+.admin-products-section {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem;
+}
+
+.admin-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.admin-table-wrap {
+    overflow-x: auto;
+}
+
+.admin-products-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.admin-products-table th {
+    text-align: left;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.admin-products-table td {
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+.admin-product-thumb {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    background: var(--color-surface-alt);
+    border-radius: var(--radius-sm);
+    padding: 0.2rem;
+}
+
+.admin-stock-input,
+.admin-inline-input {
+    width: 70px;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.85rem;
+}
+
+.admin-stock-input.out-of-stock,
+.admin-stock-cell.out-of-stock {
+    color: var(--color-danger);
+    font-weight: 700;
+}
+
+.admin-table-actions {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.admin-table-actions button {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.3rem 0.55rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+.admin-table-actions .admin-delete-btn {
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Product add/edit modal                                                  */
+/* ---------------------------------------------------------------------- */
+.admin-product-modal-content {
+    width: 560px;
+    max-width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    text-align: left;
+    position: relative;
+}
+
+.admin-product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.admin-product-form label {
+    font-weight: 600;
+    font-size: 0.88rem;
+    margin-top: 0.3rem;
+}
+
+.admin-product-form input,
+.admin-product-form select,
+.admin-product-form textarea {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: var(--color-surface);
+    color: var(--color-text);
+    width: 100%;
+}
+
+.admin-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.admin-photo-fieldset,
+.admin-specs-fieldset {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.admin-photo-fieldset legend,
+.admin-specs-fieldset legend {
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0 0.3rem;
+}
+
+.admin-specs-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.admin-spec-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.admin-spec-row input {
+    width: 100%;
+}
+
+.admin-spec-remove-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-danger);
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+}
+
+@media (max-width: 640px) {
+    .admin-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-notifications-panel {
+        width: 100%;
+    }
+}
