@@ -194,7 +194,7 @@ script.
 3. Set **Start Command**: `npm start`.
 4. Environment: Node. Add the M-Pesa/Stripe environment variables from
    [Payments Setup](#payments-setup) if you want real payments instead of demo mode.
-5. The app will be live at your Render URL (e.g., `https://your-app.onrender.com/index.html`).
+5. The app will be live at your Render URL (the current one is <https://fiti-electronics.onrender.com>).
    - Static files and the API (including `/api/payments/*`) are served together.
    - Relative URLs ensure API calls work on the deployed domain.
    - db.json provides persistent data (updates on commits).
